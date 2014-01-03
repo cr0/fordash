@@ -1,0 +1,40 @@
+dd.overview
+	background-color: $color-highlight-overview !important
+
+	&.active
+		background-color: lighten($color-highlight-overview, $nav-lightener-multi) !important
+
+article#overview
+
+	div.shortstats
+		margin: 0 0 2em 0
+
+		div.summary
+			background-color: darken(#fff, 10)
+			padding 1em
+			text-align: center
+			box-shadow: 0 4px 2px -2px darken(#fff, 15)
+
+	div.pie
+		height: 18em
+		width: 33%
+		display: inline-block
+		text-align: center
+
+		h3
+			margin-bottom: -1.5em
+
+		div
+			width: 100%
+			height: 100%
+
+	div.topcontact 
+		span.calls.average
+			color: darken(#fff, 15)
+			
+		span.messages.received
+			margin-left: 0.4em
+
+	div.timestats
+		margin: 3em 0 0 0
+			

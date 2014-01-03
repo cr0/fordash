@@ -1,0 +1,8 @@
+.test
+doc
+bower_components
+node_modules
+public/css
+public/js
+.config.yml
+.codecov.js

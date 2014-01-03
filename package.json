@@ -1,0 +1,54 @@
+{
+  "name": "fordash",
+  "private": true,
+  "version": "0.0.1",
+  "description": "a dashboard for analyzing android data",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "install": "grunt build",
+    "test": "grunt test",
+    "blanket": {
+      "pattern": [
+        ".test"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cr0/fordash"
+  },
+  "keywords": [
+    "forensic",
+    "dashboard",
+    "coffee"
+  ],
+  "author": "Christian Roth <christian.roth@port17.de> (https://github.com/cr0)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "coffee-script": "1.6.x",
+    "grunt": "0.4.x",
+    "grunt-contrib-coffee": "0.7.x",
+    "grunt-contrib-clean": "0.5.x",
+    "grunt-contrib-jade": "0.7.x",
+    "grunt-contrib-stylus": "0.6.x",
+    "bower": "1.2.x",
+    "grunt-bower-requirejs": "0.8.x"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-mocha-cov": "0.0.x",
+    "grunt-shell": "0.3.x",
+    "grunt-newer": "0.6.x",
+    "mocha": "1.12.x",
+    "chai": "1.7.x",
+    "coffee-coverage": "0.1.x",
+    "nib": "0.9.x",
+    "stylus": "0.34.x",
+    "grunt-contrib-requirejs": "0.4.x",
+    "grunt-contrib-connect": "0.5.x",
+    "connect-modrewrite": "0.5.x"
+  }
+}

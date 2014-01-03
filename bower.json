@@ -1,0 +1,25 @@
+{
+  "name": "fordash",
+  "version": "0.0.1",
+  "authors": [
+    "Christian Roth <christian.roth@port17.de>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "5.0.x",
+    "chaplin": "0.11.x",
+    "backbone-relational": "0.8.x",
+    "backbone.stickit": "0.6.x",
+    "underscore": "1.5.x",
+    "jade": "0.35.x"
+  }
+}

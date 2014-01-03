@@ -1,0 +1,1 @@
+# forDASH [![Build Status](https://travis-ci.org/cr0/fordash.png?branch=master)](https://travis-ci.org/cr0/fordash) [![Coverage Status](https://coveralls.io/repos/cr0/fordash/badge.png)](https://coveralls.io/r/cr0/fordash) [![Dependency Status](https://gemnasium.com/cr0/fordash.png)](https://gemnasium.com/cr0/fordash)

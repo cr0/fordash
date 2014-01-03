@@ -1,0 +1,13 @@
+h1
+	i.fa.fa-heart
+	= info.topcontact.contact.name
+
+h3 #{info.topcontact.calls.number} Anrufe &mdash; #{info.topcontact.calls.minutes} Minuten telefoniert 
+	span.calls.average (~#{info.topcontact.calls.average} Minuten/Anruf)
+h3 
+	span.messages.sent
+		i.fa.fa-arrow-up
+		| #{info.topcontact.messages.sent} Nachrichten gesendet
+	span.messages.received
+		i.fa.fa-arrow-down
+		| #{info.topcontact.messages.received} Nachrichten empfangen
