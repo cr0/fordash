@@ -35,7 +35,8 @@
     "grunt-contrib-jade": "0.7.x",
     "grunt-contrib-stylus": "0.6.x",
     "bower": "1.2.x",
-    "grunt-bower-requirejs": "0.8.x"
+    "grunt-bower-requirejs": "0.8.x",
+    "grunt-contrib-copy": "0.5.x"
   },
   "devDependencies": {
     "grunt-contrib-watch": "0.5.x",

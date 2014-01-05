@@ -11,8 +11,16 @@ module.exports = (grunt) ->
       coverage:
         src:        ['src/**/*.js']
       public:
-        src:        ['public/css/**', 'public/js/**', 'public/*.html', '!public/css/fonts/**']
+        src:        ['public/css/**', 'public/js/**', 'public/*.html', 'public/fonts/**']
         filter:     'isFile'
+
+    copy:
+      fonts:
+        expand:   true
+        cwd:      'bower_components/font-awesome/fonts/'
+        src:      '*'
+        dest:     'public/fonts'
+        filter:   'isFile'
 
     coffee:
       client:
@@ -79,7 +87,6 @@ module.exports = (grunt) ->
           'public/js/templates/dump/select.js':      'assets/tpl/dump/select.jade'
           'public/js/templates/dump/item.js':      'assets/tpl/dump/item.jade'
 
-          'public/js/templates/timeline.js':      'assets/tpl/timeline.jade'
           'public/js/templates/dumpinfo.js':      'assets/tpl/dumpinfo.jade'
 
           'public/js/templates/graph/contact.js':   'assets/tpl/graph/contact.jade'
@@ -89,6 +96,12 @@ module.exports = (grunt) ->
           'public/js/templates/overview/shortstats.js':      'assets/tpl/overview/shortstats.jade'
           'public/js/templates/overview/topcontact.js':      'assets/tpl/overview/topcontact.jade'
           'public/js/templates/overview/timestats.js':      'assets/tpl/overview/timestats.jade'
+
+          'public/js/templates/timeline/index.js':      'assets/tpl/timeline/index.jade'
+          'public/js/templates/timeline/history.js':      'assets/tpl/timeline/history.jade'
+          'public/js/templates/timeline/monthly.js':      'assets/tpl/timeline/monthly.jade'
+          'public/js/templates/timeline/weekly.js':      'assets/tpl/timeline/weekly.jade'
+
 
       server:
         options:
@@ -154,6 +167,7 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-newer'
   grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
   grunt.loadNpmTasks 'grunt-contrib-jade'
@@ -165,7 +179,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bower-requirejs'
 
   grunt.registerTask 'build', [
-    'clean:public', 'coffee:client', 'stylus:assets', 'jade:client', 'jade:server'
+    'clean:public', 'copy:fonts', 'coffee:client', 'stylus:assets', 'jade:client', 'jade:server'
   ]
 
   grunt.registerTask 'test', [
@@ -177,6 +191,6 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'dev', [
-    'clean:public', 'stylus:assets', 'newer:jade:client', 'newer:jade:server', 'newer:coffee:client', 'bower:client' ,
-    'connect:server', 'watch'
+    'clean:public',  'newer:copy:fonts', 'stylus:assets', 'newer:jade:client', 'newer:jade:server',
+    'newer:coffee:client', 'bower:client', 'connect:server', 'watch'
   ]

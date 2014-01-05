@@ -10,8 +10,9 @@ define (require) ->
   class Contacts extends Collection
     _.extend @prototype, Chaplin.EventBroker
 
-    #url:    "#{Chaplin.mediator.urlprefix}/contact/#{Chaplin.mediator.dumpid}/all"
-    model:  Contact
+    #url:       "#{Chaplin.mediator.urlprefix}/contact/#{Chaplin.mediator.dumpid}/all"
+    model:      Contact
+    comparator: 'name'
 
     @forDump: (dumpid) ->
     	return new Contacts url: "#{Chaplin.mediator.urlprefix}/contact/#{dumpid}/all"

@@ -23,7 +23,7 @@ define (require) ->
       'topcontact': 'div.topcontact'
       'timestats':  'div.timestats'
 
-    render: ->
+    attach: ->
       super
 
       @subview 'shortstats', new ShortstatsView model: @model, region: 'shortstats'

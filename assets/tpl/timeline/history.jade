@@ -1,0 +1,10 @@
+div
+	h4 Filter
+	i.fa.fa-phone
+	i.fa.fa-envelope
+	|  filtern:
+	select.contacts(multiple)
+		- each contact in contacts
+			option(value=#{contact.id}) #{contact.name}
+
+div.links

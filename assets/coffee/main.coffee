@@ -7,6 +7,7 @@ require.config
     # addons
     async:      '../vendor/requirejs/async',
     goog:       '../vendor/requirejs/goog',
+    links:      '../vendor/timeline/timeline'
 
   shim:
     backbone:
@@ -19,6 +20,8 @@ require.config
     nvd3:
       deps: ['d3']
       exports: 'nv'
+    links:
+      exports: 'links'
 #      
       
 define 'gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=AIzaSyAPioLTf2snn7k023uPTMreFY-y1e0M10g&sensor=false'], () -> return window.google.maps
