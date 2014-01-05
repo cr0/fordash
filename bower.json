@@ -16,10 +16,9 @@
   ],
   "dependencies": {
     "foundation": "5.0.x",
-    "chaplin": "0.11.x",
+    "chaplin": "0.12.x",
     "backbone-relational": "0.8.x",
-    "backbone.stickit": "0.6.x",
-    "underscore": "1.5.x",
-    "jade": "0.35.x"
+    "backbone.stickit": "0.7.x",
+    "jade": "1.x.x"
   }
 }

@@ -2,6 +2,7 @@ define (require) ->
   'use strict'
 
   require 'foundation'
+  require 'jquery.smooth-scroll'
 
   View        = require 'views/base/view'
   
@@ -24,3 +25,6 @@ define (require) ->
       super
       console.debug "adding foundation to skeleton"
       @$el.foundation()
+
+      console.debug "adding smoothscroll"
+      @$el.smoothScroll()

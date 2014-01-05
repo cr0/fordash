@@ -22,6 +22,10 @@ require.config
       exports: 'nv'
     links:
       exports: 'links'
+
+  map:
+    '*':
+      'underscore': 'lodash'
 #      
       
 define 'gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=AIzaSyAPioLTf2snn7k023uPTMreFY-y1e0M10g&sensor=false'], () -> return window.google.maps
