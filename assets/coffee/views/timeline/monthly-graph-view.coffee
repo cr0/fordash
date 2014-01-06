@@ -12,18 +12,30 @@ define (require) ->
     @MONTH_NAMES: [null, 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober',
       'November', 'Dezember']
 
+    year:     d3.time.format('%Y')(new Date())
+    direction:'both'
+
+    initialize: ->
+      @subscribeEvent 'graph:yearchange', (year) => 
+        @year = year
+        @update()
+
+      @subscribeEvent 'graph:directionchange', (direction) => 
+        @direction = direction
+        @update()
+
+
     attach: ->
       super
-      console.log @data()
       nv.addGraph () =>
-        chart = nv.models.stackedAreaChart()
+        @chart = nv.models.stackedAreaChart()
           .margin
             left: 40
           .x((d) -> d.label)
           .y((d) -> d.value)
           .xDomain([1,12])
 
-        chart.xAxis
+        @chart.xAxis
           .scale(1)
           .axisLabel('Monat')
           .tickFormat (d) =>
@@ -36,47 +48,56 @@ define (require) ->
           .attr("height", "100%")
           .datum(@data())
           .transition().duration(1200)
-          .call(chart)
+          .call(@chart)
 
-        nv.utils.windowResize chart.update
+        nv.utils.windowResize @chart.update
 
-        chart
+        @chart
+
+    update: ->
+      d3
+        .select(@$el[0])
+        .datum(@data())
+        .transition().duration(1200)
+        .call(@chart)
 
     data: ->
+      direction = switch @direction
+        when 'both' then ['INCOMING', 'OUTGOING']
+        when 'in' then ['INCOMING']
+        when 'out' then ['OUTGOING']
+
       calls = @model.getCalls().chain()
-        .filter (calllog) ->
-          d3.time.format('%Y')(new Date(calllog.get('date'))) is '2013'
+        .filter (calllog) =>
+          d3.time.format('%Y')(new Date(calllog.get('date'))) is "#{@year}" and calllog.get('callType') in direction
         .groupBy (calllog) ->
           d3.time.format('%-m')(new Date(calllog.get('date')))
         .map (calls, month) ->
           label: parseInt month, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       smsmms = @model.getMessages().chain()
-        .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['SMS', 'MMS']
+        .filter (message) =>
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['SMS', 'MMS'] and message.get('messagetype') in direction
         .groupBy (message) ->
           d3.time.format('%-m')(new Date(message.get('date')))
         .map (calls, month) ->
           label: parseInt month, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       wa = @model.getMessages().chain()
-        .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']
+        .filter (message) =>
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD'] and message.get('messagetype') in direction
         .groupBy (message) ->
           d3.time.format('%-m')(new Date(message.get('date')))
         .map (calls, month) ->
           label: parseInt month, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       addMissingMonths = (array) ->
@@ -94,7 +115,7 @@ define (require) ->
             label: month
             value: 0
 
-        _.sortBy array, (el) -> el.label
+        _.sortBy array, 'label'
 
       [
         key: 'Telefonate (Minuten)'

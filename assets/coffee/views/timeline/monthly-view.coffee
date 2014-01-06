@@ -3,6 +3,8 @@ define (require) ->
 
   d3        = require 'd3'
 
+  Model     = require 'models/base/model'
+
   View      = require 'views/base/view'
   MonthlyGraphView = require 'views/timeline/monthly-graph-view'
 
@@ -11,9 +13,24 @@ define (require) ->
 
   class MonthlyView extends View
     template: Template
+    year:     d3.time.format('%Y')(new Date())
+    direction:'both'
+    bindings:
+      '.year':     'monthlyyear'
+      '.minutes':  'monthlyminutes'
+      '.messages': 'monthlymessages'
+      '.whatsapp': 'monthlywhatsapp'
 
-    getTemplateData: ->
-      $.extend @model.attributes, @calculatedAttributes()
+    initialize: ->
+      @calculatedAttributes()
+
+      @subscribeEvent 'graph:yearchange', (year) => 
+        @year = year
+        @calculatedAttributes()
+
+      @subscribeEvent 'graph:directionchange', (direction) => 
+        @direction = direction
+        @calculatedAttributes()
 
   
     attach: ->
@@ -23,16 +40,21 @@ define (require) ->
 
 
     calculatedAttributes: ->
-      info:
-        minutes: @_calculatePhoneAverage()
-        messages: @_calculateMessageAverage()
-        whatsapp: @_calculateWhatsappAverage()
+      @model.set 'monthlyyear', @year
+      @model.set 'monthlyminutes', @_calculatePhoneAverage()
+      @model.set 'monthlymessages', @_calculateMessageAverage()
+      @model.set 'monthlywhatsapp', @_calculateWhatsappAverage()
 
 
     _calculatePhoneAverage: ->
+      direction = switch @direction
+        when 'both' then ['INCOMING', 'OUTGOING']
+        when 'in' then ['INCOMING']
+        when 'out' then ['OUTGOING']
+
       duration = @model.getCalls().chain()
-        .filter (call) ->
-          d3.time.format('%Y')(new Date(call.get('date'))) is '2013'
+        .filter (call) =>
+          d3.time.format('%Y')(new Date(call.get('date'))) is "#{@year}" and call.get('callType') in direction
         .reduce((memo, call) ->
           memo + call.get('duration')
         , 0)
@@ -43,9 +65,14 @@ define (require) ->
 
 
     _calculateMessageAverage: ->
+      direction = switch @direction
+        when 'both' then ['INCOMING', 'OUTGOING']
+        when 'in' then ['INCOMING']
+        when 'out' then ['OUTGOING']
+
       num = @model.getMessages().chain()
-        .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['SMS', 'MMS']
+        .filter (message) =>
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['SMS', 'MMS'] and message.get('messagetype') in direction
         .size()
         .value()
 
@@ -54,9 +81,14 @@ define (require) ->
 
 
     _calculateWhatsappAverage: ->
+      direction = switch @direction
+        when 'both' then ['INCOMING', 'OUTGOING']
+        when 'in' then ['INCOMING']
+        when 'out' then ['OUTGOING']
+
       num = @model.getMessages().chain()
-        .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']
+        .filter (message) =>
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']  and message.get('messagetype') in direction
         .size()
         .value()
 

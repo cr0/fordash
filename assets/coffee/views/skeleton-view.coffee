@@ -26,5 +26,5 @@ define (require) ->
       console.debug "adding foundation to skeleton"
       @$el.foundation()
 
-      console.debug "adding smoothscroll"
-      @$el.smoothScroll()
+      #console.debug "adding smoothscroll"
+      #@$el.smoothScroll()

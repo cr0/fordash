@@ -101,6 +101,7 @@ module.exports = (grunt) ->
           'public/js/templates/timeline/history.js':      'assets/tpl/timeline/history.jade'
           'public/js/templates/timeline/monthly.js':      'assets/tpl/timeline/monthly.jade'
           'public/js/templates/timeline/weekly.js':      'assets/tpl/timeline/weekly.jade'
+          'public/js/templates/timeline/daily.js':      'assets/tpl/timeline/daily.jade'
 
 
       server:

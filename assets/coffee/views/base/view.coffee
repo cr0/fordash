@@ -7,6 +7,8 @@ define (require) ->
 
 
   class View extends Chaplin.View
+    _.extend @prototype, Chaplin.EventBroker
+    
     autoRender: true
     getTemplateFunction: -> @template
     

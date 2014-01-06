@@ -6,6 +6,8 @@ define (require) ->
 
 
   class CollectionView extends Chaplin.CollectionView
+    _.extend @prototype, Chaplin.EventBroker
+    
     autoRender: true
     getTemplateFunction: View::getTemplateFunction
     

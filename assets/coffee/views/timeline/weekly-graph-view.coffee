@@ -13,7 +13,6 @@ define (require) ->
 
     attach: ->
       super
-      console.log @data()
       nv.addGraph () =>
         chart = nv.models.multiBarChart()
           .margin
@@ -48,8 +47,7 @@ define (require) ->
         .map (calls, weekday) ->
           label: parseInt weekday, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       smsmms = @model.getMessages().chain()
@@ -60,8 +58,7 @@ define (require) ->
         .map (calls, weekday) ->
           label: parseInt weekday, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       wa = @model.getMessages().chain()
@@ -72,8 +69,7 @@ define (require) ->
         .map (calls, weekday) ->
           label: parseInt weekday, 10
           value: calls.length
-        .sortBy (el) ->
-          el.label
+        .sortBy('label')
         .value()
 
       addMissingWeekdays = (array) ->
@@ -91,7 +87,7 @@ define (require) ->
             label: day
             value: 0
 
-        _.sortBy array, (el) -> el.label
+        _.sortBy array, 'label'
 
       [
         key: 'Telefonate (Minuten)'
