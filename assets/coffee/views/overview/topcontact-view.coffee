@@ -7,7 +7,7 @@ define (require) ->
 
 
   class TopcontactView extends View
-    @MESSAGES_MULTI:  0.25
+    @MESSAGES_MULTI:  0.15
     @MINUTES_MULTI:   0.5
 
     template:         Template
@@ -54,7 +54,7 @@ define (require) ->
           minutes: (minutes / 60).toFixed(2)
           average: (minutes / calls.length / 60).toFixed(2)
         messages: messages.countBy (message) ->
-          if message.get('messagetype') is 'OUTGOING' then 'sent' else 'received'
+          if message.get('direction') is 'OUTGOING' then 'sent' else 'received'
         contact: contact?.attributes
       }
 

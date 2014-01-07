@@ -54,7 +54,7 @@ define (require) ->
 
       duration = @model.getCalls().chain()
         .filter (call) =>
-          d3.time.format('%Y')(new Date(call.get('date'))) is "#{@year}" and call.get('callType') in direction
+          d3.time.format('%Y')(new Date(call.get('date'))) is "#{@year}" and call.get('direction') in direction
         .reduce((memo, call) ->
           memo + call.get('duration')
         , 0)
@@ -72,7 +72,7 @@ define (require) ->
 
       num = @model.getMessages().chain()
         .filter (message) =>
-          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['SMS', 'MMS'] and message.get('messagetype') in direction
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['SMS', 'MMS'] and message.get('direction') in direction
         .size()
         .value()
 
@@ -88,7 +88,7 @@ define (require) ->
 
       num = @model.getMessages().chain()
         .filter (message) =>
-          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']  and message.get('messagetype') in direction
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']  and message.get('direction') in direction
         .size()
         .value()
 

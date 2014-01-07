@@ -45,7 +45,7 @@ define (require) ->
     _calculateMessageAverage: ->
       num = @model.getMessages().chain()
         .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['SMS', 'MMS']
+          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('type') in ['SMS', 'MMS']
         .size()
         .value()
         
@@ -56,7 +56,7 @@ define (require) ->
     _calculateWhatsappAverage: ->
       num = @model.getMessages().chain()
         .filter (message) ->
-          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']
+          d3.time.format('%Y')(new Date(message.get('date'))) is '2013' and message.get('type') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']
         .size()
         .value()
 

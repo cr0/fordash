@@ -10,7 +10,7 @@ define (require) ->
   DumpinfoView        = require 'views/info/dumpinfo-view'
   TimelineView        = require 'views/timeline/timeline-view'
   OverviewView        = require 'views/overview/overview-view'
-  ContactView         = require 'views/graph/contact-view'
+  ContactView         = require 'views/contact/contact-view'
   MessageView         = require 'views/graph/message-view'
 
 
@@ -27,5 +27,5 @@ define (require) ->
       new DumpinfoView region: 'info', model: dump
       new TimelineView region: 'timeline', model: dump
       new OverviewView region: 'overview', model: dump
-      new ContactView region: 'contact'
-      new MessageView region: 'message'
+      new ContactView region: 'contact', model: dump
+      new MessageView region: 'message', model: dump

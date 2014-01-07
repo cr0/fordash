@@ -13,8 +13,13 @@ define (require) ->
 
     defaults:
       body:   '<UNKNOWN_BODY>'
+      direction:  '<UNKNOWN_DIRECTION>'
       read:   no
       type:   '<UNKNOWN_TYPE>'
-      medium: '<UNKNOWN_MEDIUM>'
       date:   '<UNKNOWN_DATE>'
+
+    mapping:
+      'messagetype':  'direction'
+      'messageMedium':'type'
+      'body':         'text'
 

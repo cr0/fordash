@@ -48,3 +48,16 @@ define (require, exports) ->
     save: (cb, attributes = {}) ->
       super attributes, cb
 
+    set: (key, val, options) ->
+      @mapping = {} if not @mapping
+      
+      if typeof key is 'object'
+        for from, to of @mapping
+          if from of key
+            key[to] = key[from]
+            delete key[from]
+      else
+        key = @mapping[key] if key of @mapping
+
+      super key, val, options
+

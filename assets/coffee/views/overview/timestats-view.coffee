@@ -100,10 +100,10 @@ define (require) ->
     _getAverageMessageLength: ->
       i = 0
       totalMessageLength = @model.getMessages().reduce (memo, message) ->
-        msgMedium = message.get('messageMedium')
+        msgMedium = message.get('type')
         if msgMedium in TimestatsView.MSG_MEDIUM
           i++
-          memo + message.get('body').length
+          memo + message.get('text').length
         else 
           memo
       , 0 

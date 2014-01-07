@@ -18,6 +18,7 @@ define (require) ->
         chart = nv.models.scatterChart()
           .margin
             left: 40
+          .color(d3.scale.category10().range());
 
         chart.xAxis
           .axisLabel('Wochentag')

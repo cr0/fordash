@@ -13,6 +13,9 @@ define (require) ->
 
     defaults:
       duration:   -1
-      callType:   '<UNKNOWN_CALLTYPE>'
+      direction:  '<UNKNOWN_DIRECTION>'
       date:       '<UNKNOWN_DATE>'
+
+    mapping:
+      'callType': 'direction'
 

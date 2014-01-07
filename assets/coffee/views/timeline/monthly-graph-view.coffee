@@ -34,6 +34,7 @@ define (require) ->
           .x((d) -> d.label)
           .y((d) -> d.value)
           .xDomain([1,12])
+          .color(d3.scale.category10().range())
 
         @chart.xAxis
           .scale(1)
@@ -69,7 +70,7 @@ define (require) ->
 
       calls = @model.getCalls().chain()
         .filter (calllog) =>
-          d3.time.format('%Y')(new Date(calllog.get('date'))) is "#{@year}" and calllog.get('callType') in direction
+          d3.time.format('%Y')(new Date(calllog.get('date'))) is "#{@year}" and calllog.get('direction') in direction
         .groupBy (calllog) ->
           d3.time.format('%-m')(new Date(calllog.get('date')))
         .map (calls, month) ->
@@ -80,7 +81,7 @@ define (require) ->
 
       smsmms = @model.getMessages().chain()
         .filter (message) =>
-          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['SMS', 'MMS'] and message.get('messagetype') in direction
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['SMS', 'MMS'] and message.get('direction') in direction
         .groupBy (message) ->
           d3.time.format('%-m')(new Date(message.get('date')))
         .map (calls, month) ->
@@ -91,7 +92,7 @@ define (require) ->
 
       wa = @model.getMessages().chain()
         .filter (message) =>
-          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('messageMedium') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD'] and message.get('messagetype') in direction
+          d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD'] and message.get('direction') in direction
         .groupBy (message) ->
           d3.time.format('%-m')(new Date(message.get('date')))
         .map (calls, month) ->

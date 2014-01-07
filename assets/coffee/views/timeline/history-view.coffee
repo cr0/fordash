@@ -29,13 +29,13 @@ define (require) ->
       console.debug "Found #{@model.getMessages().length} messages"  
 
       messages = @model.getMessages().map (message) ->
-        direction = if message.get('messagetype') is 'OUTGOING' then 'an' else 'von'
+        direction = if message.get('direction') is 'OUTGOING' then 'an' else 'von'
 
         start:    new Date(message.get('date'))
         content:  "Nachricht #{direction} #{message.get('phonenumber').get('contact').get('name')}"
 
       calls = @model.getCalls().map (calllog) ->
-        direction = if calllog.get('callType') is 'OUTGOING' then 'an' else 'von'
+        direction = if calllog.get('direction') is 'OUTGOING' then 'an' else 'von'
         contactName = calllog.get('phonenumber').get('contact').get('name')
         
         switch calllog.get('duration')

@@ -18,6 +18,7 @@ define (require) ->
           .showLabels(yes)
           .showLegend(no)
           .donut(yes)
+          .color(d3.scale.category10().range())
 
         d3
           .select(@$el[0])
@@ -36,11 +37,9 @@ define (require) ->
       incoming = 0
       outgoing = 0
 
-      @model.get('contacts').each (contact) ->
-        contact.get('phonenumbers').each (phonenumber) ->
-          phonenumber.get('messages').each (message) ->
-            if message.get('messagetype') is 'OUTGOING' then outgoing++
-            else if message.get('messagetype') is 'INCOMING' then incoming++
+      @model.getMessages().each (message) ->
+        if message.get('direction') is 'OUTGOING' then outgoing++
+        else if message.get('direction') is 'INCOMING' then incoming++
 
       [
         label: 'Empfangen'
