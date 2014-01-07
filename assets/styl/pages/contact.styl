@@ -19,9 +19,6 @@ article#contact
 				div, span
 					line-height: 1.6em
 					height: 2.1em
-
-				div 
-					display: inline-block
 					
 				div.percentage
 					background-color: $color-highlight-contact
@@ -39,10 +36,18 @@ article#contact
 					font-size: 1.3em
 					font-weight: 200
 
-				span.minutes, span.messages
+				div.minutes, div.messages
 					margin: 0 1em 0 0
-					width: 5em
-					display: inline-block
+					text-align: right
+					font-size: 0.8em
+					height: 1.1em
+
+					span
+						display: inline-block
+						width: 6em
+
+				span > i
+					margin-left: 0.3em
 
 				div.stats
 					position: absolute

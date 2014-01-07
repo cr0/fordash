@@ -16,7 +16,6 @@ define (require) ->
       $.extend @model.attributes, @calculatedAttributes()
 
     calculatedAttributes: ->
-      console.log @findTopContacts()
       info:
         top: @findTopContacts()
 
@@ -24,20 +23,30 @@ define (require) ->
       sum = 0
       contacts = @model.get('contacts').chain()
         .map (contact) ->
-          minutes = contact.get('phonenumbers').reduce (memo, phonenumber) ->
-            memo + phonenumber.get('calllogs').reduce (memo, calllog) ->
-              memo + calllog.get('duration')
-            , 0
-          , 0
+          minutesOut = minutesIn = messagesOut = messagesIn = 0
+          contact.get('phonenumbers').each (phonenumber) ->
+            phonenumber.get('calllogs').each (calllog) ->
+              switch calllog.get('direction')
+                when 'OUTGOING' then minutesOut += calllog.get('duration')
+                when 'INCOMING' then minutesIn += calllog.get('duration')
 
-          messages = contact.get('phonenumbers').reduce (memo, phonenumber) ->
-            memo + phonenumber.get('messages').length
-          , 0
+          contact.get('phonenumbers').each (phonenumber) ->
+            phonenumber.get('messages').each (message) ->
+              switch message.get('direction')
+                when 'OUTGOING' then messagesOut++
+                when 'INCOMING' then messagesIn++
 
-          score = messages * TopView.MESSAGES_MULTI + minutes * TopView.MINUTES_MULTI
+          score = (messagesIn + messagesOut) * TopView.MESSAGES_MULTI + (minutesOut + minutesIn) * TopView.MINUTES_MULTI
           sum += score
 
-          contact: contact.attributes, score: score, minutes: (minutes / 60).toFixed(2), messages: messages
+          contact: contact.attributes
+          score: score
+          minutes:
+            out: (minutesOut / 60).toFixed(2)
+            in:  (minutesIn / 60).toFixed(2)
+          messages: 
+            out: messagesOut
+            in:  messagesIn
 
         .each((contact) -> contact.percent = "#{contact.score / sum * 100}")
         .sortBy('score')

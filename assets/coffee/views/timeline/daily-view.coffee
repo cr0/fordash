@@ -6,7 +6,7 @@ define (require) ->
   View      = require 'views/base/view'
   DailyGraphView = require 'views/timeline/daily-graph-view'
 
-  Template  = require 'templates/timeline/weekly'
+  Template  = require 'templates/timeline/daily'
 
 
   class DailyView extends View

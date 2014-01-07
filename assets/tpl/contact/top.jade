@@ -8,9 +8,19 @@ ul.topcontacts
 			div.name= contact.contact.name
 			div.percentage(style="width: #{contact.percent}%")
 			div.stats
-				span.minutes
+				div.minutes
 					i.fa.fa-phone
-					| #{contact.minutes}
-				span.messages
+					span
+						| #{contact.minutes.out}
+						i.fa.fa-arrow-up.dir
+					span
+						| #{contact.minutes.in}
+						i.fa.fa-arrow-down.dir
+				div.messages
 					i.fa.fa-envelope
-					| #{contact.messages}
+					span
+						| #{contact.messages.out}
+						i.fa.fa-arrow-up.dir
+					span
+						| #{contact.messages.in}
+						i.fa.fa-arrow-down.dir
