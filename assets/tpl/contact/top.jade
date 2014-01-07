@@ -1,0 +1,16 @@
+h3 
+	i.fa.fa-star
+	| Topkontakte
+
+ul.topcontacts
+	- each contact in info.top
+		li
+			div.name= contact.contact.name
+			div.percentage(style="width: #{contact.percent}%")
+			div.stats
+				span.minutes
+					i.fa.fa-phone
+					| #{contact.minutes}
+				span.messages
+					i.fa.fa-envelope
+					| #{contact.messages}

@@ -105,6 +105,7 @@ module.exports = (grunt) ->
 
           'public/js/templates/contact/index.js':      'assets/tpl/contact/index.jade'
           'public/js/templates/contact/bubble.js':      'assets/tpl/contact/bubble.jade'
+          'public/js/templates/contact/top.js':      'assets/tpl/contact/top.jade'
 
 
       server:

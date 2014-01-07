@@ -3,3 +3,49 @@ dd.contact
 
 	&.active
 		background-color: lighten($color-highlight-contact, $nav-lightener-multi) !important
+
+article#contact
+
+	div.top
+		margin: 2em 0 0 0
+
+		ul.topcontacts
+			list-style-type: none
+			margin: 0
+
+			li
+				position: relative
+
+				div, span
+					line-height: 1.6em
+					height: 2.1em
+
+				div 
+					display: inline-block
+					
+				div.percentage
+					background-color: $color-highlight-contact
+					float: left
+					position: absolute
+					top: 0
+					left: 0
+					z-index: 10
+
+				div.name
+					color: black
+					z-index: 25
+					position: relative
+					padding: 0 0.4em
+					font-size: 1.3em
+					font-weight: 200
+
+				span.minutes, span.messages
+					margin: 0 1em 0 0
+					width: 5em
+					display: inline-block
+
+				div.stats
+					position: absolute
+					right: 0
+					top: 0
+					float: right

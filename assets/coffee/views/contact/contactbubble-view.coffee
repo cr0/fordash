@@ -19,20 +19,21 @@ define (require) ->
     attach: ->
       super
 
-      diameter = 800
+      width = 800
+      height = 500
       color = d3.scale.category20c()
 
       bubble = d3.layout.pack()
         .sort(null)
-        .size([diameter, diameter])
+        .size([width, height])
         .padding(1.5)
 
       data = bubble.nodes(@data())
 
       svg = d3.select(@$el.find('div.graph')[0])
         .append("svg")
-          .attr("width", diameter)
-          .attr("height", diameter)
+          .attr("width", width)
+          .attr("height", height)
           .attr("class", "bubble")
 
       node = svg.selectAll(".node")
@@ -40,9 +41,7 @@ define (require) ->
         .enter()
           .append("g")
             .attr("class", "node")
-            .attr "transform", (d) -> 
-              console.log d
-              "translate(" + d.x + "," + d.y + ")"
+            .attr "transform", (d) -> "translate(" + d.x + "," + d.y + ")"
             
 
       node.append("title")
@@ -57,7 +56,7 @@ define (require) ->
         .style("text-anchor", "middle")
         .text((d) -> d.name.slice(0, d.r / 3))
 
-      d3.select(self.frameElement).style("height", diameter + "px");
+      d3.select(self.frameElement).style("height", height + "px");
 
     data: ->
       contacts = @model.get('contacts').chain()
