@@ -9,6 +9,7 @@ define (require) ->
 
     initMediator: ->
       Chaplin.mediator.dumpid = utils.uuid4()
+      Chaplin.mediator.cid = null
       Chaplin.mediator.urlprefix = '//localhost:8080/android-forensic-server/rest'
       console.debug "Setting dumpid to #{Chaplin.mediator.dumpid}"
       super

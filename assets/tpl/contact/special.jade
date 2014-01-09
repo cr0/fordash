@@ -1,0 +1,11 @@
+h3
+	i.fa.fa-bullhorn
+	| Auffällige Kontakte
+
+ul.special
+	- each special in specials
+		li #{special.contact.name} ist auffällig, weil #{special.reason}
+
+div.info
+	i.fa.fa-info
+	| * Es wird nur eine Auswahl angezeigt

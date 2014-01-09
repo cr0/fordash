@@ -1,0 +1,51 @@
+if forensic.details
+
+	h3= forensic.details.contact.name
+
+	ul.numbers.row
+		- each number in forensic.details.contact.phonenumbers
+			li
+				case number.type
+					when 'CELLPHONE'
+						i.fa.fa-mobile
+					when 'HOME'
+						i.fa.fa-home
+					when 'WORK'
+						i.fa.fa-building-o
+					when 'FAX'
+						i.fa.fa-print
+				| #{number.number}
+
+	div.phone.row
+		div.out
+			span= forensic.details.minutes.out
+			i.fa.fa-arrow-up
+		div.in
+			span= forensic.details.minutes.in
+			i.fa.fa-arrow-down
+		| Minuten telefoniert
+
+	div.messages.row
+		div.out
+			span= forensic.details.messages.out
+			i.fa.fa-arrow-up
+		div.in
+			span= forensic.details.messages.in
+			i.fa.fa-arrow-down
+		| Nachrichten
+
+
+	h4 ... in Relation
+
+	div.average.phone
+	div.average.messages
+
+	div
+		i.fa.fa-info-circle
+		| Balkenlänge entspricht dem Durschnitt pro Person; Marker dem ausgewählten Kontakt
+
+else
+	h3
+		| Um Kontaktdetails anzuzeigen muss ein 
+		a(href="#contact") Kontakt 
+		| ausgewählt werden

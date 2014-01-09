@@ -5,7 +5,8 @@ h3
 ul.topcontacts
 	- each contact in info.top
 		li
-			div.name= contact.contact.name
+			div.name
+				a(href="/dashboard/#{id}/contact/#{contact.contact.id}") #{contact.contact.name}
 			div.percentage(style="width: #{contact.percent}%")
 			div.stats
 				div.minutes

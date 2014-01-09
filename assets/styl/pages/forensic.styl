@@ -1,0 +1,56 @@
+dd.forensic
+	background-color: $color-highlight-forensic !important
+
+	&.active
+		background-color: lighten($color-highlight-forensic, $nav-lightener-multi) !important
+
+article#forensic
+	background-color: $color-highlight-forensic
+	color: #fff !important
+
+	h2
+		color: #fff
+
+	& > div > div
+		margin: 0 0 2em 0
+
+	div.details
+		
+		.row
+			display: inline-block
+			width: 29%
+
+		ul.numbers
+			font-size: 1.5em
+			list-style-type: none
+			margin: 0
+			width: 40%
+
+			li i 
+				width: 1.5em
+				
+		div.phone, div.messages
+			text-align: right
+
+			i
+				margin: 0 0 0 0.4em
+
+			div.in span
+				font-size: 2.6em
+
+			div.out span
+				font-size: 3.2em
+
+		div.average
+			height: 4em
+
+	div.log
+		
+		ul.lines
+			max-height: 35em
+			overflow: auto
+			margin: 0
+
+			li
+				margin-bottom: 0.7em
+

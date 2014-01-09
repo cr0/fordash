@@ -18,7 +18,7 @@ define (require) ->
       'timeline':  'article#timeline'
       'overview':  'article#overview'
       'contact':   'article#contact'
-      'message':   'article#message'
+      'forensic':  'article#forensic'
     template: Template
 
     attach: ->

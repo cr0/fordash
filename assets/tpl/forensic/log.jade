@@ -1,0 +1,48 @@
+if forensic.log
+	h3 Logfile für #{forensic.log.name}
+	ul.lines
+		- each line in forensic.log.lines
+			li
+				case line.type
+					when 'CALL_INCOMING'
+						i.fa.fa-phone
+						i.fa.fa-arrow-down
+					when 'CALL_OUTGOING'
+						i.fa.fa-phone
+						i.fa.fa-arrow-up
+					when 'CALL_MISSED'
+						i.fa.fa-phone
+						i.fa.fa-reply
+					when 'MSG_INCOMING_MMS'
+						i.fa.fa-envelope
+						i.fa.fa-picture-o
+						i.fa.fa-arrow-down
+					when 'MSG_OUTGOING_MMS'
+						i.fa.fa-envelope
+						i.fa.fa-picture-o
+						i.fa.fa-arrow-up
+					when 'MSG_INCOMING_SMS'
+						i.fa.fa-envelope
+						i.fa.fa-arrow-down
+					when 'MSG_OUTGOING_SMS'
+						i.fa.fa-envelope
+						i.fa.fa-arrow-up
+					when 'MSG_INCOMING_WA_TEXT'
+						i.fa.fa-envelope
+						i.fa-comments
+						i.fa.fa-arrow-down
+					when 'MSG_OUTGOING_WA_TEXT'
+						i.fa.fa-envelope
+						i.fa.fa-comments
+						i.fa.fa-arrow-up
+					default
+						i.fa.fa-exclamation-circle
+						span= line.type
+				span.date &mdash; #{line.formatted_date}
+				div.message= line.message
+
+else
+	h3
+		| Um ein Logfile anzuzeigen muss ein 
+		a(href="#contact") Kontakt 
+		| ausgewählt werden

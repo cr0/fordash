@@ -11,7 +11,7 @@ define (require) ->
   TimelineView        = require 'views/timeline/timeline-view'
   OverviewView        = require 'views/overview/overview-view'
   ContactView         = require 'views/contact/contact-view'
-  MessageView         = require 'views/graph/message-view'
+  ForensicView        = require 'views/forensic/forensic-view'
 
 
   class HelloController extends Controller
@@ -28,4 +28,8 @@ define (require) ->
       new TimelineView region: 'timeline', model: dump
       new OverviewView region: 'overview', model: dump
       new ContactView region: 'contact', model: dump
-      new MessageView region: 'message', model: dump
+      new ForensicView region: 'forensic', model: dump
+
+      if Chaplin.mediator.cid? 
+        console.info "Had a cid saved, redirecting"
+        @redirectTo 'contact_show', id: params.id, cid: Chaplin.mediator.cid
