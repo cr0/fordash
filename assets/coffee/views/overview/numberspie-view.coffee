@@ -19,7 +19,7 @@ define (require) ->
           .showLabels(yes)
           .showLegend(no)
           .donut(yes)
-          .color(d3.scale.category10().range());
+          .color(['#2C82C9','#EEE657', '#FCB941', '#2CC990', '#FC6042'])
 
         d3
           .select(@$el[0])

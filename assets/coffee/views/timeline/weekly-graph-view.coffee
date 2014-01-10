@@ -31,7 +31,7 @@ define (require) ->
             left: 40
           .x((d) -> d.label)
           .y((d) -> d.value)
-          .color(d3.scale.category10().range())
+          .color(['#2C82C9','#EEE657', '#FCB941', '#2CC990', '#FC6042'])
 
         @chart.xAxis
           .axisLabel('Wochentag')

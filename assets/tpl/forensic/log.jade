@@ -6,35 +6,35 @@ if forensic.log
 				case line.type
 					when 'CALL_INCOMING'
 						i.fa.fa-phone
-						i.fa.fa-arrow-down
+						i.fa.fa-arrow-left
 					when 'CALL_OUTGOING'
 						i.fa.fa-phone
-						i.fa.fa-arrow-up
+						i.fa.fa-arrow-right
 					when 'CALL_MISSED'
 						i.fa.fa-phone
 						i.fa.fa-reply
 					when 'MSG_INCOMING_MMS'
 						i.fa.fa-envelope
 						i.fa.fa-picture-o
-						i.fa.fa-arrow-down
+						i.fa.fa-arrow-left
 					when 'MSG_OUTGOING_MMS'
 						i.fa.fa-envelope
 						i.fa.fa-picture-o
-						i.fa.fa-arrow-up
+						i.fa.fa-arrow-right
 					when 'MSG_INCOMING_SMS'
 						i.fa.fa-envelope
-						i.fa.fa-arrow-down
+						i.fa.fa-arrow-left
 					when 'MSG_OUTGOING_SMS'
 						i.fa.fa-envelope
-						i.fa.fa-arrow-up
+						i.fa.fa-arrow-right
 					when 'MSG_INCOMING_WA_TEXT'
 						i.fa.fa-envelope
 						i.fa-comments
-						i.fa.fa-arrow-down
+						i.fa.fa-arrow-left
 					when 'MSG_OUTGOING_WA_TEXT'
 						i.fa.fa-envelope
 						i.fa.fa-comments
-						i.fa.fa-arrow-up
+						i.fa.fa-arrow-right
 					default
 						i.fa.fa-exclamation-circle
 						span= line.type

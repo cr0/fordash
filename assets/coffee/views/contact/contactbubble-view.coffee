@@ -3,6 +3,7 @@ define (require) ->
 
   _         = require 'underscore'
   d3        = require 'd3'
+  Chaplin   = require 'chaplin'
 
   View      = require 'views/base/view'
 
@@ -55,6 +56,9 @@ define (require) ->
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
         .text((d) -> d.name.slice(0, d.r / 3))
+
+      node.on 'click', (d) => Chaplin.utils.redirectTo 'contact_show', id: @model.id, cid: d.id
+
 
       d3.select(self.frameElement).style("height", height + "px");
 
