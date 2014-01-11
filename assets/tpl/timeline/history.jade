@@ -1,10 +1,17 @@
-div
-	h4 Filter
-	i.fa.fa-phone
-	i.fa.fa-envelope
-	|  filtern:
-	select.contacts(multiple)
-		- each contact in contacts
-			option(value=#{contact.id}) #{contact.name}
+
+h2 Chronologischer Verlauf aller Aktivitäten
+
+div.filter
+	a(href="#", data-timeline="phone").active
+		i.fa.fa-phone
+		| Telefonate
+	a(href="#", data-timeline="message").active
+		i.fa.fa-envelope
+		| Nachrichten
+	a(href="#", data-timeline="browser").active
+		i.fa.fa-globe
+		| Webseiten
+	i.fa.fa-clock-o
+	input(type="date", placeholder="Zu Datum springen")
 
 div.links

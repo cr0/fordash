@@ -56,7 +56,7 @@ define (require) ->
     attach: ->
       super
 
-      #@subview 'history', new HistoryView model: @model, region: 'history'
+      @subview 'history', new HistoryView model: @model, region: 'history'
       @subview 'monthly', new MonthlyView model: @model, region: 'monthly'
       @subview 'weekly', new WeeklyView model: @model, region: 'weekly'
       @subview 'daily', new DialyView model: @model, region: 'daily'
