@@ -1,6 +1,6 @@
 if forensic.details
 
-	h3= forensic.details.contact.name
+	h2= forensic.details.contact.name
 
 	ul.numbers.row
 		- each number in forensic.details.contact.phonenumbers
@@ -40,12 +40,6 @@ if forensic.details
 	div.average.phone
 	div.average.messages
 
-	div
+	div.info
 		i.fa.fa-info-circle
 		| Balkenlänge entspricht dem Durschnitt pro Person; Marker dem ausgewählten Kontakt
-
-else
-	h3
-		| Um Kontaktdetails anzuzeigen muss ein 
-		a(href="#contact") Kontakt 
-		| ausgewählt werden

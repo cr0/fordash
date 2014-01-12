@@ -7,7 +7,7 @@ define (require) ->
 
   View      = require 'views/base/view'
   
-  Template  = require 'templates/forensic/details'
+  Template  = require 'templates/contact/details'
 
 
   class LogView extends View
@@ -29,7 +29,7 @@ define (require) ->
 
       nv.addGraph () => 
         chart = nv.models.bulletChart()
-          .color(['silver', 'gray'])
+          .color(['#fcb941', 'gray'])
           .margin
             left: 70
             right: 0
@@ -46,7 +46,7 @@ define (require) ->
 
       nv.addGraph () => 
         chart = nv.models.bulletChart()
-          .color(['silver', 'gray'])
+          .color(['#fcb941', 'gray'])
           .margin
             left: 70
             right: 0

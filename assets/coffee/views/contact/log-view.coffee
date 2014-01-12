@@ -3,7 +3,7 @@ define (require) ->
 
   View      = require 'views/base/view'
   
-  Template  = require 'templates/forensic/log'
+  Template  = require 'templates/contact/log'
 
 
   class LogView extends View
