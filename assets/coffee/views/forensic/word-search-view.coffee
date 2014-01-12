@@ -29,7 +29,7 @@ define (require) ->
       @resultView.dispose() if @resultView
 
       @loadView = new LoadView container: @$el.find('div.messages')
-      @resultView =  new WordSearchResultView model: messages, container: @$el.find('div.messages')
+      @resultView =  new WordSearchResultView model: messages, container: @$el.find('div.results')
 
       messages.fetch()
         .always =>

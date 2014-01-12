@@ -1,5 +1,17 @@
 if forensic.log
 	h3 Logfile für #{forensic.log.name}
+
+	div.filter
+		a(href="#", data-timeline="phone").active
+			i.fa.fa-phone
+			| Telefonate
+		a(href="#", data-timeline="message").active
+			i.fa.fa-envelope
+			| Nachrichten
+		a(href="#", data-timeline="whatsapp").active
+			i.fa.fa-comments
+			| Whatsapp
+
 	ul.lines
 		- each line in forensic.log.lines
 			li

@@ -1,13 +1,22 @@
-h4 #{results.length} Kontakte haben das Wort verwendet
+h4 #{results.length} Treffer zu diesem Zeitpunkt
 ul.results
 	- each result in results
 		li
 			h5
-				| #{result.author} (#{result.messages.length} Nachrichten)
+				| #{result.author} (#{result.items.length} Elemente)
 			ul.items
-				- each message in result.messages
+				- each item in result.items
 					li
-						case message.type
+						case item.type
+							when 'CALL_INCOMING'
+								i.fa.fa-phone
+								i.fa.fa-arrow-left
+							when 'CALL_OUTGOING'
+								i.fa.fa-phone
+								i.fa.fa-arrow-right
+							when 'CALL_MISSED'
+								i.fa.fa-phone
+								i.fa.fa-reply
 							when 'MSG_INCOMING_MMS'
 								i.fa.fa-envelope
 								i.fa.fa-picture-o
@@ -28,5 +37,5 @@ ul.results
 							when 'MSG_OUTGOING_WA_TEXT'
 								i.fa.fa-comments
 								i.fa.fa-arrow-right
-						a(href="#{message.url}") #{message.date} Uhr: #{message.text}
+						a(href="#{item.url}") #{item.date} Uhr: #{item.text}
 

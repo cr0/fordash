@@ -11,7 +11,7 @@ module.exports = (grunt) ->
       coverage:
         src:        ['src/**/*.js']
       public:
-        src:        ['public/css/**', 'public/js/**', 'public/*.html', 'public/fonts/**']
+        src:        ['public/css/**/*', 'public/js/**/*', 'public/*.html', 'public/fonts/**']
         filter:     'isFile'
 
     copy:
@@ -113,6 +113,8 @@ module.exports = (grunt) ->
           'public/js/templates/forensic/index.js':      'assets/tpl/forensic/index.jade'
           'public/js/templates/forensic/word-search.js':      'assets/tpl/forensic/word-search.jade'
           'public/js/templates/forensic/word-search-result.js':      'assets/tpl/forensic/word-search-result.jade'
+          'public/js/templates/forensic/timestamp.js':      'assets/tpl/forensic/timestamp.jade'
+          'public/js/templates/forensic/timestamp-result.js':      'assets/tpl/forensic/timestamp-result.jade'
 
 
       server:
