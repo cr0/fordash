@@ -34,7 +34,7 @@ define (require) ->
           .x((d) -> d.label)
           .y((d) -> d.value)
           .xDomain([1,12])
-          .color(['#2C82C9','#EEE657', '#FCB941', '#2CC990', '#FC6042'])
+          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#2CC990'])
 
         @chart.xAxis
           .scale(1)
@@ -101,6 +101,28 @@ define (require) ->
         .sortBy('label')
         .value()
 
+      calendars = @model.get('calendars').chain()
+        .filter (calendar) =>
+          d3.time.format('%Y')(new Date(calendar.get('start'))) is "#{@year}"
+        .groupBy (calendar) ->
+          d3.time.format('%-m')(new Date(calendar.get('start')))
+        .map (calendars, month) ->
+          label: parseInt month, 10
+          value: calendars.length
+        .sortBy('label')
+        .value()
+
+      browserhistories = @model.get('browserhistories').chain()
+        .filter (browserhistory) =>
+          d3.time.format('%Y')(new Date(browserhistory.get('start'))) is "#{@year}"
+        .groupBy (browserhistory) ->
+          d3.time.format('%-m')(new Date(browserhistory.get('start')))
+        .map (browserhistories, month) ->
+          label: parseInt month, 10
+          value: browserhistories.length
+        .sortBy('label')
+        .value()
+
       addMissingMonths = (array) ->
         months = [1..12]
 
@@ -127,4 +149,10 @@ define (require) ->
       ,
         key: 'Nachrichten (Whatsapp)'
         values: addMissingMonths wa
+      ,
+        key: 'Termine'
+        values: addMissingMonths calendars
+      ,
+        key: 'Webseiten'
+        values: addMissingMonths browserhistories
       ]

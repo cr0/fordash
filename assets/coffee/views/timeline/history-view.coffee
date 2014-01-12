@@ -10,7 +10,9 @@ define (require) ->
 
 
   class HistoryView extends View
-    items:      ['phone', 'message', 'browser']
+    @MINIMAL_EVENT_DURATION: 120 * 1000
+
+    items:      ['phone', 'message', 'browser', 'calendar']
     template:   Template
     events:
       'change select.contacts': (contact...) ->
@@ -50,7 +52,7 @@ define (require) ->
 
 
     _getData: ->
-      messages = calls = browsers = []
+      messages = calls = events = browsers = []
 
       if _.contains @items, 'message'
         messages = @model.getMessages().map (message) ->
@@ -73,7 +75,18 @@ define (require) ->
           end:      new Date(calllog.get('date') + calllog.get('duration') * 1000) if calllog.get('duration') > 120
           content:  message
 
-      _.union messages, calls
+      if _.contains @items, 'calendar'
+        events = @model.get('calendars').map (calendar) ->
+          start:    new Date(calendar.get('start'))
+          end:      new Date(calendar.get('end')) if calendar.get('end') - HistoryView.MINIMAL_EVENT_DURATION > calendar.get('start')
+          content:  "Termin: #{calendar.get('title')}"
+
+      if _.contains @items, 'browser'
+        browsers = @model.get('browserhistories').map (browserhistory) ->
+          start:    new Date(browserhistory.get('date'))
+          content:  "Webseite: #{browserhistory.get('title')}"
+
+      _.union messages, calls, events, browsers
 
 
     _animateStart: (date) ->

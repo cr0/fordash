@@ -44,6 +44,8 @@ define (require) ->
       @model.set 'monthlyminutes', @_calculatePhoneAverage()
       @model.set 'monthlymessages', @_calculateMessageAverage()
       @model.set 'monthlywhatsapp', @_calculateWhatsappAverage()
+      @model.set 'monthlyevents', @_calculateEventsAverage()
+      @model.set 'monthlybrowsers', @_calculateBrowsersAverage()
 
 
     _calculatePhoneAverage: ->
@@ -89,6 +91,28 @@ define (require) ->
       num = @model.getMessages().chain()
         .filter (message) =>
           d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD']  and message.get('direction') in direction
+        .size()
+        .value()
+
+      num = num / 12
+      num = if num > 1 then (num).toFixed() else '< 1'
+
+
+    _calculateEventsAverage: ->
+      num = @model.get('calendars').chain()
+        .filter (calendar) =>
+          d3.time.format('%Y')(new Date(calendar.get('start'))) is "#{@year}"
+        .size()
+        .value()
+
+      num = num / 12
+      num = if num > 1 then (num).toFixed() else '< 1'
+      
+
+    _calculateBrowsersAverage: ->
+      num = @model.get('browserhistories').chain()
+        .filter (browserhistory) =>
+          d3.time.format('%Y')(new Date(browserhistory.get('start'))) is "#{@year}"
         .size()
         .value()
 

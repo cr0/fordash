@@ -31,7 +31,7 @@ define (require) ->
             left: 40
           .x((d) -> d.label)
           .y((d) -> d.value)
-          .color(['#2C82C9','#EEE657', '#FCB941', '#2CC990', '#FC6042'])
+          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#2CC990'])
 
         @chart.xAxis
           .axisLabel('Wochentag')
@@ -97,6 +97,28 @@ define (require) ->
         .sortBy('label')
         .value()
 
+      calendars = @model.get('calendars').chain()
+        .filter (calendar) =>
+          d3.time.format('%Y')(new Date(calendar.get('start'))) is "#{@year}"
+        .groupBy (calendar) ->
+          d3.time.format('%-w')(new Date(calendar.get('start')))
+        .map (calendars, weekday) ->
+          label: parseInt weekday, 10
+          value: calendars.length
+        .sortBy('label')
+        .value()
+
+      browserhistories = @model.get('browserhistories').chain()
+        .filter (browserhistory) =>
+          d3.time.format('%Y')(new Date(browserhistory.get('start'))) is "#{@year}"
+        .groupBy (browserhistory) ->
+          d3.time.format('%-w')(new Date(browserhistory.get('start')))
+        .map (browserhistories, weekday) ->
+          label: parseInt weekday, 10
+          value: browserhistories.length
+        .sortBy('label')
+        .value()
+
       addMissingWeekdays = (array) ->
         days = [0..6]
 
@@ -123,4 +145,10 @@ define (require) ->
       ,
         key: 'Nachrichten (Whatsapp)'
         values: addMissingWeekdays wa
+      ,
+        key: 'Termine'
+        values: addMissingWeekdays calendars
+      ,
+        key: 'Webseiten'
+        values: addMissingWeekdays browserhistories
       ]

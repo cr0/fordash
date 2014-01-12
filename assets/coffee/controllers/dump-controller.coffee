@@ -11,7 +11,9 @@ define (require) ->
   Contacts            = require 'models/contacts'
   Phonenumbers        = require 'models/phonenumbers'
   Calllogs            = require 'models/calllogs'
-  Messages           = require 'models/messages'
+  Messages            = require 'models/messages'
+  Browserhistories    = require 'models/browserhistories'
+  Calendars           = require 'models/calendars'
 
   DumpSelectView      = require 'views/dump/select-view'
   LoadView            = require 'views/load-view'
@@ -49,14 +51,18 @@ define (require) ->
       phonenumbers  = Phonenumbers.forDump params.id
       calllogs      = Calllogs.forDump params.id
       messages      = Messages.forDump params.id
+      browserhistories = Browserhistories.forDump params.id
+      calendars     = Calendars.forDump params.id
 
-      $.when dump.fetch(), contacts.fetch(), phonenumbers.fetch(), calllogs.fetch(), messages.fetch()
+      $.when dump.fetch(), contacts.fetch(), phonenumbers.fetch(), calllogs.fetch(), messages.fetch(), browserhistories.fetch(), calendars.fetch()
         .always ->
           loadView.dispose()
         .done => 
           console.debug "Received dump and nested objects"
-          console.debug dump, contacts, phonenumbers, calllogs, messages
+          console.debug dump, contacts, phonenumbers, calllogs, messages, browserhistories, calendars
           dump.set 'contacts', contacts
+          dump.set 'calendars', calendars
+          dump.set 'browserhistories', browserhistories
           @redirectTo 'dashboard_home', id: params.id
         .fail (e) =>
           console.error "Failed to received dump and/or nested objects: ", e

@@ -18,3 +18,6 @@ define (require) ->
       stop:           '<UNKNOWN_STOP_DATE>'
       location:       '<UNKNOWN_LOCATION>'
 
+    mapping:
+      'stop':         'end'
+

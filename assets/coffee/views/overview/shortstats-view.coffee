@@ -20,6 +20,10 @@ define (require) ->
           total: @model.getMessages().length
         calllogs:
           total: @_getTotalMinutes()
+        events:
+          total: @model.get('calendars').length
+        browser:
+          total: @model.get('browserhistories').length
 
 
     _getTotalMinutes: ->

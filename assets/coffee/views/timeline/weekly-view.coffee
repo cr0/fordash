@@ -42,6 +42,9 @@ define (require) ->
       @model.set 'weeklyminutes', @_calculatePhoneAverage()
       @model.set 'weeklymessages', @_calculateMessageAverage()
       @model.set 'weeklywhatsapp', @_calculateWhatsappAverage()
+      @model.set 'weeklyevents', @_calculateEventsAverage()
+      @model.set 'weeklybrowsers', @_calculateBrowsersAverage()
+
 
 
     _calculatePhoneAverage: ->
@@ -93,3 +96,24 @@ define (require) ->
       num = num / 52
       num = if num > 1 then (num).toFixed() else '< 1'
       
+
+    _calculateEventsAverage: ->
+      num = @model.get('calendars').chain()
+        .filter (calendar) =>
+          d3.time.format('%Y')(new Date(calendar.get('start'))) is "#{@year}"
+        .size()
+        .value()
+
+      num = num / 52
+      num = if num > 1 then (num).toFixed() else '< 1'
+      
+
+    _calculateBrowsersAverage: ->
+      num = @model.get('browserhistories').chain()
+        .filter (browserhistory) =>
+          d3.time.format('%Y')(new Date(browserhistory.get('start'))) is "#{@year}"
+        .size()
+        .value()
+
+      num = num / 52
+      num = if num > 1 then (num).toFixed() else '< 1'

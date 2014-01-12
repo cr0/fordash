@@ -10,5 +10,8 @@ define (require) ->
   class Calendars extends Collection
     _.extend @prototype, Chaplin.EventBroker
 
-    url:    "#{Chaplin.mediator.urlprefix}/calendars/#{Chaplin.mediator.dumpid}/all"
+    #url:    "#{Chaplin.mediator.urlprefix}/calendars/#{Chaplin.mediator.dumpid}/all"
     model:  Calendar
+
+    @forDump: (dumpid) ->
+    	return new Calendars url: "#{Chaplin.mediator.urlprefix}/calendars/#{dumpid}/all"
