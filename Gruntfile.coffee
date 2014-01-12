@@ -111,6 +111,8 @@ module.exports = (grunt) ->
           'public/js/templates/forensic/index.js':      'assets/tpl/forensic/index.jade'
           'public/js/templates/forensic/log.js':      'assets/tpl/forensic/log.jade'
           'public/js/templates/forensic/details.js':      'assets/tpl/forensic/details.jade'
+          'public/js/templates/forensic/word-search.js':      'assets/tpl/forensic/word-search.jade'
+          'public/js/templates/forensic/word-search-result.js':      'assets/tpl/forensic/word-search-result.jade'
 
 
       server:

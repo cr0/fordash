@@ -35,6 +35,7 @@ define (require) ->
       @timeline = new links.Timeline(@$el.find('div.links')[0])
       @timeline.draw @_getData(), 
         cluster:    yes
+        min:        new Date(1970, 1, 1)
         max:        new Date()
         height:     '450px'
 
@@ -69,7 +70,7 @@ define (require) ->
             else message = "Anruf #{direction} #{contactName}"
 
           start:    new Date(calllog.get('date'))
-          end:      new Date(calllog.get('date') + calllog.get('duration') * 1000) if calllog.get('duration') is not 0
+          end:      new Date(calllog.get('date') + calllog.get('duration') * 1000) if calllog.get('duration') > 120
           content:  message
 
       _.union messages, calls

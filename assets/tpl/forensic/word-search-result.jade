@@ -1,0 +1,32 @@
+h4 #{results.length} Kontakte haben das Wort verwendet
+ul.results
+	- each result in results
+		li
+			h5
+				| #{result.author} (#{result.messages.length} Nachrichten)
+			ul.messages
+				- each message in result.messages
+					li
+						case message.type
+							when 'MSG_INCOMING_MMS'
+								i.fa.fa-envelope
+								i.fa.fa-picture-o
+								i.fa.fa-arrow-left
+							when 'MSG_OUTGOING_MMS'
+								i.fa.fa-envelope
+								i.fa.fa-picture-o
+								i.fa.fa-arrow-right
+							when 'MSG_INCOMING_SMS'
+								i.fa.fa-envelope
+								i.fa.fa-arrow-left
+							when 'MSG_OUTGOING_SMS'
+								i.fa.fa-envelope
+								i.fa.fa-arrow-right
+							when 'MSG_INCOMING_WA_TEXT'
+								i.fa-comments
+								i.fa.fa-arrow-left
+							when 'MSG_OUTGOING_WA_TEXT'
+								i.fa.fa-comments
+								i.fa.fa-arrow-right
+						a(href="#{message.url}") #{message.date} Uhr: #{message.text}
+

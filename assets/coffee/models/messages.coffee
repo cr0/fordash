@@ -14,3 +14,6 @@ define (require) ->
 
     @forDump: (dumpid) ->
     	return new Messages url: "#{Chaplin.mediator.urlprefix}/messages/#{dumpid}/all"
+
+    @forDumpAndWord: (dumpid, word) ->
+      return new Messages url: "#{Chaplin.mediator.urlprefix}/messages/#{dumpid}/sequence/#{word}"
