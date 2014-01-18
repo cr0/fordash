@@ -4,6 +4,7 @@ define (require) ->
   View              = require 'views/base/view'
   WordSearchView    = require 'views/forensic/word-search-view'
   TimestampView     = require 'views/forensic/timestamp-view'
+  WebsiteView       = require 'views/forensic/website-view'
   
   Template          = require 'templates/forensic/index'
 
@@ -14,9 +15,11 @@ define (require) ->
     regions:
       'wordsearch': 'div.wordsearch'
       'timestamp': 'div.timestamp'
+      'websites': 'div.websites'
 
     attach: ->
       super
 
       @subview 'wordsearch', new WordSearchView model: @model, region: 'wordsearch'
       @subview 'timestamp', new TimestampView model: @model, region: 'timestamp'
+      @subview 'websites', new WebsiteView model: @model, region: 'websites'
