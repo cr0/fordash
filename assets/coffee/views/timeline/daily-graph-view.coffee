@@ -27,7 +27,6 @@ define (require) ->
 
     attach: ->
       super
-      console.log @data()
       nv.addGraph () =>
         @chart = nv.models.scatterChart()
           .margin

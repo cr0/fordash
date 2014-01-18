@@ -28,7 +28,8 @@ define (require) ->
     attach: ->
       super
       nv.addGraph () =>
-        @chart = nv.models.stackedAreaChart()
+        @chart = nv.models.lineChart()
+        # @chart = nv.models.stackedAreaChart()
           .margin
             left: 40
           .x((d) -> d.label)
