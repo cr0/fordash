@@ -5,9 +5,8 @@ require.config
 
   paths:
     # addons
-    async:      '../vendor/requirejs/async',
-    goog:       '../vendor/requirejs/goog',
-    links:      '../vendor/timeline/timeline'
+    links:            '../vendor/timeline/timeline'
+    'jquery.preload':  '../vendor/jquery.preload'
 
   shim:
     backbone:
@@ -22,6 +21,10 @@ require.config
       exports: 'nv'
     links:
       exports: 'links'
+    'jquery.preload':
+      deps:   ['jquery']
+    'jquery.exif':
+      deps:   ['jquery']
 
   map:
     '*':

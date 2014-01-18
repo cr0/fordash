@@ -10,5 +10,8 @@ define (require) ->
   class Pictures extends Collection
     _.extend @prototype, Chaplin.EventBroker
 
-    url:    "#{Chaplin.mediator.urlprefix}/pictures/#{Chaplin.mediator.dumpid}/all"
+    #url:    "#{Chaplin.mediator.urlprefix}/pictures/#{Chaplin.mediator.dumpid}/all"
     model:  Picture
+
+    @forDump: (dumpid) ->
+    	return new Pictures url: "#{Chaplin.mediator.urlprefix}/media/#{dumpid}/all"

@@ -116,6 +116,8 @@ module.exports = (grunt) ->
           'public/js/templates/forensic/timestamp.js':      'assets/tpl/forensic/timestamp.jade'
           'public/js/templates/forensic/timestamp-result.js':      'assets/tpl/forensic/timestamp-result.jade'
           'public/js/templates/forensic/website.js':      'assets/tpl/forensic/website.jade'
+          'public/js/templates/forensic/picturemap.js':      'assets/tpl/forensic/picturemap.jade'
+          'public/js/templates/forensic/picturelist.js':      'assets/tpl/forensic/picturelist.jade'
 
 
       server:
