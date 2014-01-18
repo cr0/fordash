@@ -72,8 +72,6 @@ define (require) ->
           minutes:  @minutesData()
           messages: @messagesData()
 
-      console.log response
-
       response
 
 

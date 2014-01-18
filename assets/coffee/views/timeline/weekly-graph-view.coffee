@@ -31,10 +31,11 @@ define (require) ->
             left: 40
           .x((d) -> d.label)
           .y((d) -> d.value)
-          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#2CC990'])
+          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#fff'])
 
         @chart.xAxis
           .axisLabel('Wochentag')
+          .tickValues([0..6])
           .tickFormat (d) =>
             WeeklyGraphView.DAY_NAMES[d]
 

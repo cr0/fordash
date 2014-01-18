@@ -18,6 +18,8 @@ define (require) ->
       '.minutes':  'weeklyminutes'
       '.messages': 'weeklymessages'
       '.whatsapp': 'weeklywhatsapp'
+      '.events':   'weeklyevents'
+      '.browser':  'weeklybrowsers'
 
     initialize: ->
       @calculatedAttributes()

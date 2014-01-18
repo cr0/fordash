@@ -34,10 +34,11 @@ define (require) ->
           .x((d) -> d.label)
           .y((d) -> d.value)
           .xDomain([1,12])
-          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#2CC990'])
+          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#fff'])
 
         @chart.xAxis
           .scale(1)
+          .tickValues([1..12])
           .axisLabel('Monat')
           .tickFormat (d) =>
             MonthlyGraphView.MONTH_NAMES[d]
