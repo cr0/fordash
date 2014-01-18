@@ -2,7 +2,6 @@ define (require) ->
   'use strict'
 
   require 'jquery.preload'
-  require 'jquery.exif'
 
   $         = require 'jquery'
   gmaps     = require 'gmaps'
