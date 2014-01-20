@@ -29,8 +29,7 @@ define (require) ->
           marker = new google.maps.Marker
             position: new gmaps.LatLng picture.get('latitude'), picture.get('longitude')
             title:    picture.get('name')
-
-          marker.setMap @map
+            map:      @map
 
 
 

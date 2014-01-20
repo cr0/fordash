@@ -31,7 +31,7 @@ define (require) ->
             left: 40
           .x((d) -> d.label)
           .y((d) -> d.value)
-          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#fff'])
+          .color(['#2C82C9','#EEE657', '#FCB941', '#FC6042', '#FFF'])
 
         @chart.xAxis
           .axisLabel('Wochentag')
@@ -71,7 +71,7 @@ define (require) ->
         .groupBy (calllog) ->
           d3.time.format('%-w')(new Date(calllog.get('date')))
         .map (calls, weekday) ->
-          label: parseInt weekday, 10
+          label: _.parseInt weekday
           value: calls.length
         .sortBy('label')
         .value()
@@ -82,7 +82,7 @@ define (require) ->
         .groupBy (message) ->
           d3.time.format('%-w')(new Date(message.get('date')))
         .map (calls, weekday) ->
-          label: parseInt weekday, 10
+          label: _.parseInt  weekday
           value: calls.length
         .sortBy('label')
         .value()
@@ -93,7 +93,7 @@ define (require) ->
         .groupBy (message) ->
           d3.time.format('%-w')(new Date(message.get('date')))
         .map (calls, weekday) ->
-          label: parseInt weekday, 10
+          label: _.parseInt  weekday
           value: calls.length
         .sortBy('label')
         .value()
@@ -104,7 +104,7 @@ define (require) ->
         .groupBy (calendar) ->
           d3.time.format('%-w')(new Date(calendar.get('start')))
         .map (calendars, weekday) ->
-          label: parseInt weekday, 10
+          label: _.parseInt  weekday
           value: calendars.length
         .sortBy('label')
         .value()
@@ -115,7 +115,7 @@ define (require) ->
         .groupBy (browserhistory) ->
           d3.time.format('%-w')(new Date(browserhistory.get('start')))
         .map (browserhistories, weekday) ->
-          label: parseInt weekday, 10
+          label: _.parseInt  weekday
           value: browserhistories.length
         .sortBy('label')
         .value()

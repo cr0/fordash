@@ -17,7 +17,7 @@ module.exports = (grunt) ->
     copy:
       fonts:
         expand:   true
-        cwd:      'bower_components/font-awesome/fonts/'
+        cwd:      'public/components/font-awesome/fonts/'
         src:      '*'
         dest:     'public/fonts'
         filter:   'isFile'
@@ -152,8 +152,6 @@ module.exports = (grunt) ->
     bower:
       client:
         rjsConfig:  'public/js/main.js'
-        options:
-          baseUrl:  'public/js'
 
     watch:
       client:
