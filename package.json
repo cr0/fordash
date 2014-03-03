@@ -36,7 +36,8 @@
     "grunt-contrib-stylus": "0.6.x",
     "bower": "1.2.x",
     "grunt-bower-requirejs": "0.8.x",
-    "grunt-contrib-copy": "0.5.x"
+    "grunt-contrib-copy": "0.5.x",
+    "load-grunt-tasks": "0.4.x"
   },
   "devDependencies": {
     "grunt-contrib-watch": "0.5.x",
@@ -50,6 +51,7 @@
     "stylus": "0.34.x",
     "grunt-contrib-requirejs": "0.4.x",
     "grunt-contrib-connect": "0.5.x",
-    "connect-modrewrite": "0.5.x"
+    "connect-modrewrite": "0.5.x",
+    "grunt-codo": "~0.1.0"
   }
 }

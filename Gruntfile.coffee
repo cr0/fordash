@@ -4,6 +4,8 @@ mountFolder = (connect, dir) ->
   connect.static require("path").resolve(dir)
 
 module.exports = (grunt) ->
+  require('load-grunt-tasks')(grunt)
+
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
 
@@ -128,8 +130,8 @@ module.exports = (grunt) ->
         files:
           'public/index.html':    'views/index.jade'
 
-    requirejs: 
-      compile: 
+    requirejs:
+      compile:
         options:
           preserveLicenseComments: false
           generateSourceMaps: false
@@ -157,7 +159,7 @@ module.exports = (grunt) ->
       client:
         files:      ['assets/styl/**/*.styl', 'assets/tpl/**/*.jade', 'assets/coffee/**/*.coffee']
         tasks:      ['stylus:assets', 'jade:client', 'coffee:client', 'bower:client']
-        options: 
+        options:
           livereload: true
 
     connect:
@@ -179,19 +181,11 @@ module.exports = (grunt) ->
               mountFolder connect, 'public'
             ]
 
+    codo:
+      options:
+        title:  'forDASH API documentation'
+        inputs: ['assets/coffee']
 
-  grunt.loadNpmTasks 'grunt-newer'
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-contrib-stylus'
-  grunt.loadNpmTasks 'grunt-contrib-jade'
-  grunt.loadNpmTasks 'grunt-contrib-requirejs'
-  grunt.loadNpmTasks 'grunt-mocha-cov'
-  grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-shell'
-  grunt.loadNpmTasks 'grunt-contrib-connect'
-  grunt.loadNpmTasks 'grunt-bower-requirejs'
 
   grunt.registerTask 'build', [
     'clean:public', 'copy:fonts', 'coffee:client', 'stylus:assets', 'jade:client', 'jade:server'
@@ -199,10 +193,14 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'test', [
     'mochacov:client'
-  ]   
+  ]
 
   grunt.registerTask 'travis', [
-     'shell:coverage', 'mochacov:coverage', 'clean:coverage'
+    'shell:coverage', 'mochacov:coverage', 'clean:coverage'
+  ]
+
+  grunt.registerTask 'doc', [
+    'codo'
   ]
 
   grunt.registerTask 'dev', [
