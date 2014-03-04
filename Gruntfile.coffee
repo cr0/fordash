@@ -53,7 +53,7 @@ module.exports = (grunt) ->
       options:
         recursive:    true
         files:        'test/spec/**/*-test.coffee'
-        compilers:    ['coffee:coffee-script']
+        compilers:    ['coffee:coffee-script/register']
 
     stylus:
       assets:
@@ -152,7 +152,7 @@ module.exports = (grunt) ->
 
     shell:
       coverage:
-        command:    './node_modules/coffee-coverage/bin/coffeecoverage --initfile .codecov.js --exclude node_modules,Gruntfile.coffee,.git,test,assets --path relative . .'
+        command:    './node_modules/coffee-coverage/bin/coffeecoverage --initfile .codecov.js --exclude node_modules,Gruntfile.coffee,.git,test --path relative . .'
 
     bower:
       require:

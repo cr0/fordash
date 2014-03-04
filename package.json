@@ -10,8 +10,9 @@
     "install": "grunt build",
     "test": "grunt test",
     "blanket": {
+      "loader": "./node-loaders/coffee-script",
       "pattern": [
-        ".assets/coffee/"
+        "./assets/coffee/"
       ]
     }
   },
