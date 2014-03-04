@@ -152,8 +152,11 @@ module.exports = (grunt) ->
         command:    './node_modules/coffee-coverage/bin/coffeecoverage --initfile .codecov.js --exclude node_modules,Gruntfile.coffee,.git,test,assets --path relative . .'
 
     bower:
-      client:
+      require:
         rjsConfig:  'public/js/main.js'
+      install:
+        targetDir:  'public/components'
+        layout:     'byComponent'
 
     watch:
       client:
@@ -188,7 +191,8 @@ module.exports = (grunt) ->
 
 
   grunt.registerTask 'build', [
-    'clean:public', 'copy:fonts', 'coffee:client', 'stylus:assets', 'jade:client', 'jade:server'
+    'clean:public', 'bower:install', 'copy:fonts', 'coffee:client', 'stylus:assets', 'bower:require', 'jade:client',
+    'jade:server'
   ]
 
   grunt.registerTask 'test', [
@@ -204,6 +208,6 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'dev', [
-    'clean:public',  'newer:copy:fonts', 'stylus:assets', 'newer:jade:client', 'newer:jade:server',
-    'newer:coffee:client', 'bower:client', 'connect:server', 'watch'
+    'clean:public', 'bower:install', 'newer:copy:fonts', 'stylus:assets', 'newer:jade:client', 'newer:jade:server',
+    'newer:coffee:client', 'bower:require', 'connect:server', 'watch'
   ]
