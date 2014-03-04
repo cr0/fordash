@@ -11,7 +11,7 @@ module.exports = (grunt) ->
 
     clean:
       coverage:
-        src:        ['src/**/*.js']
+        src:        ['assets/**/*.js']
       public:
         src:        ['public/css/**/*', 'public/js/**/*', 'public/*.html', 'public/fonts/**']
         filter:     'isFile'
@@ -38,6 +38,10 @@ module.exports = (grunt) ->
         ]
 
     mochacov:
+      html:
+        options:
+          reporter:    'html-cov'
+          require:     ['.codecov.js']
       coverage:
         options:
           require:     ['.codecov.js']
