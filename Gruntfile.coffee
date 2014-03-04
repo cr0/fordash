@@ -40,9 +40,8 @@ module.exports = (grunt) ->
     mochacov:
       coverage:
         options:
-          require:        ['.codecov.js']
-          coveralls:
-            serviceName:  'travis-ci'
+          require:     ['.codecov.js']
+          coveralls:   yes
       client:
         options:
           reporter:   'spec'
