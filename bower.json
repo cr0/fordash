@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "foundation": "5.0.x",
-    "chaplin": "0.12.x",
+    "chaplin": "1.0.0",
     "backbone-relational": "0.8.x",
     "backbone.stickit": "0.7.x",
     "jade": "1.x.x",
@@ -25,6 +25,10 @@
     "font-awesome": "4.0.x",
     "requirejs": "2.1.x",
     "moment": "2.5.x",
-    "jquery.smooth-scroll": "1.4.x"
+    "jquery.smooth-scroll": "1.4.x",
+    "jquery": "2.1.x",
+    "lodash": "2.4.x",
+    "backbone": "1.1.x",
+    "d3": "3.4.x"
   }
 }

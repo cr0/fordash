@@ -20,7 +20,7 @@ define (require) ->
   class Contact extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/contact/#{Chaplin.mediator.dumpid}/id/"
+    urlRoot: "contact/#{Chaplin.mediator.dumpid}/id/"
 
     defaults:
       name: '<UNKNOWN_CONTACT>'
@@ -44,12 +44,13 @@ define (require) ->
      * @return {Messages} a collection with the {Contact}'s {Message}s
     ###
     getMessages: ->
-      new Messages @get('phonenumbers')
+      messages = @get('phonenumbers')
         .chain()
         .map (phonenumber) ->
           phonenumber.get('messages').models
         .flatten()
         .value()
+      new Messages messages
 
 
     ###*
@@ -58,9 +59,10 @@ define (require) ->
      * @return {Calllogs} a collection with the {Contact}'s {Calllog}s
     ###
     getCalls: ->
-      new Calllogs @get('phonenumbers')
+      calls = @get('phonenumbers')
         .chain()
         .map (phonenumber) ->
           phonenumber.get('calllogs').models
         .flatten()
         .value()
+      new Calllogs calls

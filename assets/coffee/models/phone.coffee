@@ -16,7 +16,7 @@ define (require) ->
   class Phone extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/phones/id/"
+    urlRoot: "phones/id/"
 
     defaults:
       brand: '<UNKNOWN_BRAND>'

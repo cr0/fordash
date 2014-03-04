@@ -17,7 +17,7 @@ define (require) ->
   class Message extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/messages/id/"
+    urlRoot: "messages/id/"
 
     defaults:
       body:   '<UNKNOWN_BODY>'

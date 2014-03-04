@@ -27,4 +27,4 @@ define (require) ->
      * @return {Pictures}
     ###
     @forDump: (dumpid) ->
-    	return new Pictures url: "#{Chaplin.mediator.urlprefix}/media/#{dumpid}/all"
+    	return new Pictures url: "media/#{dumpid}/all"

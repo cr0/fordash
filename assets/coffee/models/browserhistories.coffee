@@ -27,4 +27,4 @@ define (require) ->
      * @return {Browserhistories}
     ###
     @forDump: (dumpid) ->
-    	return new Browserhistories url: "#{Chaplin.mediator.urlprefix}/browserhistory/#{dumpid}/all"
+    	return new Browserhistories url: "browserhistory/#{dumpid}/all"

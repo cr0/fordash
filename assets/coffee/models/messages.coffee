@@ -17,7 +17,7 @@ define (require) ->
   class Messages extends Collection
     _.extend @prototype, Chaplin.EventBroker
 
-    url:    "#{Chaplin.mediator.urlprefix}/messages/#{Chaplin.mediator.dumpid}/all"
+    url:    "messages/#{Chaplin.mediator.dumpid}/all"
     model:  Message
 
 
@@ -28,7 +28,7 @@ define (require) ->
      * @return {Messages}
     ###
     @forDump: (dumpid) ->
-    	return new Messages url: "#{Chaplin.mediator.urlprefix}/messages/#{dumpid}/all"
+    	return new Messages url: "messages/#{dumpid}/all"
 
 
     ###*
@@ -39,4 +39,4 @@ define (require) ->
      * @return {Messages}
     ###
     @forDumpAndWord: (dumpid, word) ->
-      return new Messages url: "#{Chaplin.mediator.urlprefix}/messages/#{dumpid}/sequence/#{word}"
+      return new Messages url: "messages/#{dumpid}/sequence/#{word}"

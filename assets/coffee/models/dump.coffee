@@ -29,7 +29,7 @@ define (require) ->
   class Dump extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/dumps/dumpId/"
+    urlRoot: "dumps/dumpId/"
 
     defaults:
       createdAt:            null
@@ -113,7 +113,7 @@ define (require) ->
      * @return {Messages} a collection with the {Dump}'s {Message}s
     ###
     getMessages: ->
-      new Messages @get('contacts').chain()
+      messages = @get('contacts').chain()
         .map (contact) ->
           contact.get('phonenumbers').models
         .flatten()
@@ -121,6 +121,7 @@ define (require) ->
           phonenumber.get('messages').models
         .flatten()
         .value()
+      new Messages messages
 
 
     ###*
@@ -129,7 +130,7 @@ define (require) ->
      * @return {Calllogs} a collection with the {Dump}'s {Calllog}s
     ###
     getCalls: ->
-      new Calllogs @get('contacts').chain()
+      calls = @get('contacts').chain()
         .map (contact) ->
           contact.get('phonenumbers').models
         .flatten()
@@ -137,3 +138,4 @@ define (require) ->
           phonenumber.get('calllogs').models
         .flatten()
         .value()
+      new Calllogs calls

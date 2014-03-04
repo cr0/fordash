@@ -18,7 +18,7 @@ define (require) ->
   class Picture extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: -> "#{Chaplin.mediator.urlprefix}/media/#{Chaplin.mediator.dumpid}/name/"
+    urlRoot: -> "media/#{Chaplin.mediator.dumpid}/name/"
 
     defaults:
       duration:   -1

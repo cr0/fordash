@@ -17,5 +17,5 @@ define (require) ->
   class Dumps extends Collection
     _.extend @prototype, Chaplin.EventBroker
 
-    url:    "#{Chaplin.mediator.urlprefix}/dumps/all"
+    url:    "dumps/all"
     model:  Dump

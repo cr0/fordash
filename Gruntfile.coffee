@@ -157,14 +157,11 @@ module.exports = (grunt) ->
     bower:
       require:
         rjsConfig:  'public/js/main.js'
-      install:
-        targetDir:  'public/components'
-        layout:     'byComponent'
 
     watch:
       client:
         files:      ['assets/styl/**/*.styl', 'assets/tpl/**/*.jade', 'assets/coffee/**/*.coffee']
-        tasks:      ['stylus:assets', 'jade:client', 'coffee:client', 'bower:client']
+        tasks:      ['stylus:assets', 'jade:client', 'coffee:client', 'bower:require']
         options:
           livereload: true
 
@@ -194,7 +191,7 @@ module.exports = (grunt) ->
 
 
   grunt.registerTask 'build', [
-    'clean:public', 'bower:install', 'copy:fonts', 'coffee:client', 'stylus:assets', 'bower:require', 'jade:client',
+    'clean:public', 'copy:fonts', 'coffee:client', 'stylus:assets', 'bower:require', 'jade:client',
     'jade:server'
   ]
 
@@ -211,6 +208,6 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'dev', [
-    'clean:public', 'bower:install', 'newer:copy:fonts', 'stylus:assets', 'newer:jade:client', 'newer:jade:server',
+    'clean:public', 'newer:copy:fonts', 'stylus:assets', 'newer:jade:client', 'newer:jade:server',
     'newer:coffee:client', 'bower:require', 'connect:server', 'watch'
   ]

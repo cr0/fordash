@@ -27,4 +27,4 @@ define (require) ->
      * @return {Calendars}
     ###
     @forDump: (dumpid) ->
-    	return new Calendars url: "#{Chaplin.mediator.urlprefix}/calendars/#{dumpid}/all"
+    	return new Calendars url: "calendars/#{dumpid}/all"

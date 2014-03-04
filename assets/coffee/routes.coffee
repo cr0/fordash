@@ -7,4 +7,4 @@ define ->
     match 'load/:id', 									'dump#load', 				name: 'dump_load'
     match 'dashboard/:id/contact/:cid', 'contact#show', 		name: 'contact_show'
 
-    match '*notfound', 'hello#show'
+    match '*notfound',                  'dump#select'

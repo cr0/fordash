@@ -16,7 +16,7 @@ define (require) ->
   class Browserhistory extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/browserhistory/id/"
+    urlRoot: "browserhistory/id/"
 
     defaults:
       visit:   -1

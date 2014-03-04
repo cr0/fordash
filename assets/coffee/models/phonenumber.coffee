@@ -20,7 +20,7 @@ define (require) ->
   class Phonenumber extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/number/#{Chaplin.mediator.dumpid}/id/"
+    urlRoot: "number/#{Chaplin.mediator.dumpid}/id/"
 
     defaults:
       number: '<UNKNOWN_NUMBER>'

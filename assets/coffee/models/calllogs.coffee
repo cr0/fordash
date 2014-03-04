@@ -27,4 +27,4 @@ define (require) ->
      * @return {Calllogs}
     ###
     @forDump: (dumpid) ->
-    	return new Calllogs url: "#{Chaplin.mediator.urlprefix}/calllogs/#{dumpid}/all"
+    	return new Calllogs url: "calllogs/#{dumpid}/all"

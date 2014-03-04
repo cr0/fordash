@@ -16,7 +16,7 @@ define (require) ->
   class Calendar extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/calendars/id/"
+    urlRoot: "calendars/id/"
 
     defaults:
       title:          '<UNKNOWN_TITLE>'

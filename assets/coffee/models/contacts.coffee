@@ -28,4 +28,4 @@ define (require) ->
      * @return {Contacts}
     ###
     @forDump: (dumpid) ->
-    	return new Contacts url: "#{Chaplin.mediator.urlprefix}/contact/#{dumpid}/all"
+    	return new Contacts url: "contact/#{dumpid}/all"

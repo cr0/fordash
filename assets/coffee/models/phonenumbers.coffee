@@ -28,4 +28,4 @@ define (require) ->
      * @return {Phonenumbers}
     ###
     @forDump: (dumpid) ->
-    	return new Phonenumbers url: "#{Chaplin.mediator.urlprefix}/number/#{dumpid}/all"
+    	return new Phonenumbers url: "number/#{dumpid}/all"

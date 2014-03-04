@@ -17,7 +17,7 @@ define (require) ->
   class Calllog extends Model
     _.extend @prototype, Chaplin.EventBroker
 
-    urlRoot: "#{Chaplin.mediator.urlprefix}/calllogs/id/"
+    urlRoot: "calllogs/id/"
 
     defaults:
       duration:   -1

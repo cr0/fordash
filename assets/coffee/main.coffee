@@ -5,15 +5,10 @@ require.config
 
   paths:
     # addons
-    links:            '../vendor/timeline/timeline'
+    links:             '../vendor/timeline/timeline'
     'jquery.preload':  '../vendor/jquery.preload'
 
   shim:
-    backbone:
-      deps: ['underscore', 'jquery'],
-      exports: 'Backbone'
-    underscore:
-      exports: '_'
     d3:
       exports: 'd3'
     nvd3:
@@ -29,8 +24,8 @@ require.config
   map:
     '*':
       'underscore': 'lodash'
-#      
-      
+#
+
 define 'gmaps', ['async!http://maps.google.com/maps/api/js?v=3&key=AIzaSyAPioLTf2snn7k023uPTMreFY-y1e0M10g&sensor=false'], () -> return window.google.maps
 
 require ['application', 'routes'], (Application, routes) ->
@@ -41,5 +36,7 @@ require ['application', 'routes'], (Application, routes) ->
     routes: routes,
     controllerSuffix: '-controller'
     pushState: yes
+    root: '/'
+    apiRoot: '//localhost:8080/android-forensic-server/rest/'
 
   console.log app
