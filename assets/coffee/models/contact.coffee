@@ -8,8 +8,15 @@ define (require) ->
   Phonenumbers    = require 'models/phonenumbers'
   Calllogs        = require 'models/calllogs'
   Messages        = require 'models/messages'
-  
 
+
+  ###*
+   * Class representing a {Contact} which has several {Phonenumber}s
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+  ###
   class Contact extends Model
     _.extend @prototype, Chaplin.EventBroker
 
@@ -31,6 +38,11 @@ define (require) ->
     ]
 
 
+    ###*
+     * Get all {Messages} for a {Contact}
+     *
+     * @return {Messages} a collection with the {Contact}'s {Message}s
+    ###
     getMessages: ->
       new Messages @get('phonenumbers')
         .chain()
@@ -39,6 +51,12 @@ define (require) ->
         .flatten()
         .value()
 
+
+    ###*
+     * Get all {Calllogs} for a {Contact}
+     *
+     * @return {Calllogs} a collection with the {Contact}'s {Calllog}s
+    ###
     getCalls: ->
       new Calllogs @get('phonenumbers')
         .chain()

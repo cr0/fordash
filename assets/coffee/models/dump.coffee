@@ -16,8 +16,16 @@ define (require) ->
   Calendars       = require 'models/calendars'
   Messages        = require 'models/messages'
   Calllogs        = require 'models/calllogs'
-  
 
+
+  ###*
+   * Class representing a {Dump}. A dump is the base object holding any information such as {Contact}s, {Picture}s and
+   * so on
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+  ###
   class Dump extends Model
     _.extend @prototype, Chaplin.EventBroker
 
@@ -73,13 +81,37 @@ define (require) ->
         includeInJSON:  no
     ]
 
+
+    ###*
+     * Create new {Dump}
+     *
+     * @param  {Object} A classic backbone constructor options hash
+     * @return {Dump}
+    ###
     initialize: (options) ->
-      @on 'change:createdAt', @updateFormattedCreatedAt, @
+      @on 'change:createdAt', @_updateFormattedCreatedAt, @
 
-    updateFormattedCreatedAt: (model, value, options) ->
+
+    ###*
+     * Helper method for updating the {Dump#formatted_date} value. This property is normally used to output a date
+     * in views
+     *
+     * @param  {Dump} model  The current {Dump} instance
+     * @param  {Date} value  The new value of {Dump#date}
+     * @param  {Object} options
+     * @return {Dump} The current {Dump} instance
+     * @private
+    ###
+    _updateFormattedCreatedAt: (model, value, options) ->
       # Thu Jan 02 13:10:56 CET 2014
-      @set 'formatted_createdAt', "#{Moment(value, 'ddd MMM DD HH:mm:ss [CET] YYYY').format('D. MMM YYYY, HH:mm:ss')} Uhr" if value? 
+      @set 'formatted_createdAt', "#{Moment(value, 'ddd MMM DD HH:mm:ss [CET] YYYY').format('D. MMM YYYY, HH:mm:ss')} Uhr" if value?
 
+
+    ###*
+     * Get all {Messages} for a {Dump} ignoring the associated {Contact}
+     *
+     * @return {Messages} a collection with the {Dump}'s {Message}s
+    ###
     getMessages: ->
       new Messages @get('contacts').chain()
         .map (contact) ->
@@ -90,6 +122,12 @@ define (require) ->
         .flatten()
         .value()
 
+
+    ###*
+     * Get all {Calllogs} for a {Dump} ignoring the associated {Contact}
+     *
+     * @return {Calllogs} a collection with the {Dump}'s {Calllog}s
+    ###
     getCalls: ->
       new Calllogs @get('contacts').chain()
         .map (contact) ->

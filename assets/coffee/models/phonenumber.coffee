@@ -8,8 +8,15 @@ define (require) ->
   Calllogs        = require 'models/calllogs'
   Message         = require 'models/message'
   Messages        = require 'models/messages'
-  
 
+
+  ###*
+   * Class representing a {Phonenumber} which has {Calllogs} and {Messages} attached
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+  ###
   class Phonenumber extends Model
     _.extend @prototype, Chaplin.EventBroker
 

@@ -4,8 +4,15 @@ define (require) ->
   Chaplin         = require 'chaplin'
 
   Model           = require 'models/base/model'
-  
 
+
+  ###*
+   * Class representing a {Browserhistory} event like a visited website
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+  ###
   class Browserhistory extends Model
     _.extend @prototype, Chaplin.EventBroker
 

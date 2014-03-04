@@ -5,21 +5,43 @@ define (require, exports) ->
 
   Chaplin       = require 'chaplin'
 
+
+  ###*
+   * A base {Chaplin.Model} class extending {Backbone.RelationalModel}
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+   * @include Chaplin.SyncMachine
+  ###
   exports.Model = class Model extends Backbone.RelationalModel
     _.extend @prototype, Chaplin.EventBroker
     _.extend @prototype, Chaplin.SyncMachine
-    
+
     attributes = ['getAttributes', 'serialize', 'disposed']
     for attr in attributes
       @::[attr] = Chaplin.Model::[attr]
 
     idAttribute: 'id'
 
+
+    ###*
+     * Dispose a model and signal Backbone.Relational that any attached collection/model should be disposed, too
+     *
+     * @event relational:unregister
+    ###
     dispose: ->
       return if @disposed
       @trigger 'relational:unregister', @, @collection
       Chaplin.Model::dispose.call(@)
 
+
+    ###*
+     * Fetch the model from the server
+     *
+     * @param  {Object} options = {} Hash with callbacks for success, error and denied (optional)
+     * @return {jQuery.Deferred} A jQuery Deferred object used to chain following events (load, fail, ...)
+    ###
     fetch: (options = {}) ->
       class ServerError extends Error
         constructor: (@name, @code, @message, @stack) ->
@@ -44,13 +66,29 @@ define (require, exports) ->
 
       super options
 
-    # make usage of save more comfortable
+
+    ###*
+     * Wrap the save event to be easier to use
+     *
+     * @param  {Object} db Hash with callbacks for success, error and denied (optional)
+     * @param  {Object} attributes = {} Additional properties for the {jQuery#ajax} method
+     * @return {jQuery.Deferred} A jQuery Deferred object used to chain following events (load, fail, ...)
+    ###
     save: (cb, attributes = {}) ->
       super attributes, cb
 
+
+    ###*
+     * Set a attribute on the current model. Uses a model's mapping table property to rename attributes caught from the
+     * server.
+     *
+     * @param {String} key The name of the attribute to set (will be renamed according to the mapping table)
+     * @param {Object} val The value of the attribute to set
+     * @param {Object} options Additional properties
+    ###
     set: (key, val, options) ->
       @mapping = {} if not @mapping
-      
+
       if typeof key is 'object'
         for from, to of @mapping
           if from of key

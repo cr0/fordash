@@ -4,9 +4,21 @@ define (require) ->
   Chaplin = require 'chaplin'
   utils   = require 'lib/utils'
 
+
+  ###*
+   * The forDASH application
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+  ###
   class Application extends Chaplin.Application
     title: 'forDASH'
 
+
+    ###*
+     * Add some cross application properties to the {Chaplin.Mediator}. {Chaplin.Mediator} is sealed afterwards
+     * prohibiting its extension.
+    ###
     initMediator: ->
       Chaplin.mediator.dumpid = utils.uuid4()
       Chaplin.mediator.cid = null
