@@ -7,11 +7,31 @@ define (require) ->
   SkeletonView        = require 'views/skeleton-view'
 
 
+  ###*
+   * Base controller providing two regions: header and site
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+  ###
   class Controller extends Chaplin.Controller
+
+    ###*
+     * Create regions
+     *
+     * @param  {Object} params Route variables and GET Parameters
+     * @param  {String} route Current route
+     * @private
+    ###
     beforeAction: (params, route) ->
       @reuse 'header', HeaderView
       @reuse 'site', SkeletonView
 
+
+    ###*
+     * When dumpid changes, change the corresponding {Chaplin.Mediator}'s value
+     *
+     * @return {Chaplin.Controller}
+    ###
     initialize: ->
       console.debug "Subscribing to dumpid changes"
       Chaplin.mediator.subscribe 'dumpid:change', (value) ->

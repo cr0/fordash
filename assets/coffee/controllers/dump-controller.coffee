@@ -20,8 +20,19 @@ define (require) ->
   LoadView            = require 'views/load-view'
 
 
+  ###*
+   * Controller handling the loading of {Dump}s
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+  ###
   class DumpController extends Controller
 
+    ###*
+     * Load a list of all {Dumps}
+     *
+     * @param  {Object} params Route variables and GET Parameters
+    ###
     select: (params) ->
       @adjustTitle "Select dump"
 
@@ -33,13 +44,18 @@ define (require) ->
           dumps.each (dump) -> dump.fetch()
         .always ->
           loadView.dispose()
-        .done -> 
+        .done ->
           console.debug "Received #{dumps.length} dumps: ", dumps
           new DumpSelectView region: 'info', collection: dumps
         .fail (e) ->
           console.error "Failed to received dumps: ", e
 
 
+    ###*
+     * Load a specific {Dump}
+     *
+     * @param  {Object} params Route variables and GET Parameters
+    ###
     load: (params) ->
       @adjustTitle "Loading #{params.id}"
       Chaplin.mediator.dumpid = params.id
@@ -59,7 +75,7 @@ define (require) ->
       $.when dump.fetch(), contacts.fetch(), phonenumbers.fetch(), calllogs.fetch(), messages.fetch(), browserhistories.fetch(), calendars.fetch(), pictures.fetch()
         .always ->
           loadView.dispose()
-        .done => 
+        .done =>
           console.debug "Received dump and nested objects"
           console.debug dump, contacts, phonenumbers, calllogs, messages, browserhistories, calendars, pictures
           dump.set 'contacts', contacts
