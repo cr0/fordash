@@ -1,4 +1,5 @@
-a(href="load/#{id}")
-	span.brand= phone.brand
-	span.model= phone.model 
-	span &mdash; ##{id} (#{formatted_createdAt})
+a(href="/load/#{id}")
+  span.id ##{id}
+  span.date #{formatted_createdAt}
+    if phone.brand != '<UNKNOWN_BRAND>' && phone.model != '<UNKNOWN_MODEL>'
+       &mdash; #{phone.brand} #{phone.model}

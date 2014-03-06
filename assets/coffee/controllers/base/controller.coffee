@@ -3,8 +3,11 @@ define (require) ->
 
   Chaplin             = require 'chaplin'
 
+  Dumps               = require 'models/dumps'
+
   HeaderView          = require 'views/header-view'
   SkeletonView        = require 'views/skeleton-view'
+  DumpSelectView      = require 'views/dump/select-view'
 
 
   ###*
@@ -25,6 +28,7 @@ define (require) ->
     beforeAction: (params, route) ->
       @reuse 'header', HeaderView
       @reuse 'site', SkeletonView
+      @reuse 'loader', DumpSelectView, region: 'loader', collection: new Dumps
 
 
     ###*
@@ -37,5 +41,7 @@ define (require) ->
       Chaplin.mediator.subscribe 'dumpid:change', (value) ->
         Chaplin.mediator.dumpid = value
         console.log "Dumpid changed to #{value}"
+
+      super
 
 

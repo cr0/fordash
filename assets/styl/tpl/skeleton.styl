@@ -3,6 +3,11 @@ div#skeleton
   width: 100%
   white-space: nowrap
 
+  .off-canvas-wrap, .inner-wrap, .main-section
+    height: 100%
+  .main-section
+    overflow-y: auto
+
   article
     min-height: 100%
     width: 100%
@@ -21,7 +26,7 @@ div#skeleton
       & > div
         width: $page-width-huge
 
-  nav 
+  nav
     padding: 0
 
     dl dd
@@ -31,7 +36,11 @@ div#skeleton
       margin: 0
       transition: height 0.6s ease-in-out
 
-      a 
+      &.dump
+        width: $nav-dump-width
+        cursor: pointer
+
+      a
         width: 100%
         height: 100%
         color: white
@@ -40,7 +49,7 @@ div#skeleton
         padding: 0 0 0 0.2em
         transition: color 0.6s ease-in-out
 
-    dl dd.active 
+    dl dd.active
       background-color: lighten(gray, $nav-lightener-multi)
 
       a
@@ -52,3 +61,14 @@ div#skeleton
 
     a
       color: transparent
+
+  nav.tab-bar
+    background-color: transparent
+    height: auto
+    line-height: auto
+
+  aside.left-off-canvas-menu
+    width: 500px
+
+.move-right > .inner-wrap
+  transform(translate3d(500px, 0, 0))

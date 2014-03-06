@@ -3,7 +3,7 @@ define (require) ->
 
   CollectionView  = require 'views/base/collection-view'
   DumpItemView    = require 'views/dump/item-view'
-  
+
   Template        = require 'templates/dump/select'
 
 
@@ -12,6 +12,11 @@ define (require) ->
     className:      'dumps'
     itemView:       DumpItemView
     listSelector:   'ul.dumps'
+
+    initialize: ->
+      super
+      @subscribeEvent 'refresh:dumps', => @collection.fetch()
+
 
     renderAllItems: ->
       console.debug "rendering collection", @collection

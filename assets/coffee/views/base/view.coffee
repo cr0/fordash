@@ -6,12 +6,19 @@ define (require) ->
   Chaplin       = require 'chaplin'
 
 
+  ###*
+   * A base {Chaplin.View} class
+   *
+   * @author Christian Roth
+   * @version 0.0.1
+   * @include Chaplin.EventBroker
+  ###
   class View extends Chaplin.View
     _.extend @prototype, Chaplin.EventBroker
-    
+
     autoRender: true
     getTemplateFunction: -> @template
-    
+
     render: ->
       super
       @stickit() if @model

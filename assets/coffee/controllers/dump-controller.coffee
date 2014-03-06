@@ -7,7 +7,7 @@ define (require) ->
   Controller          = require 'controllers/base/controller'
 
   Dump                = require 'models/dump'
-  Dumps               = require 'models/dumps'
+  Phone               = require 'models/phone'
   Contacts            = require 'models/contacts'
   Phonenumbers        = require 'models/phonenumbers'
   Calllogs            = require 'models/calllogs'
@@ -16,7 +16,6 @@ define (require) ->
   Calendars           = require 'models/calendars'
   Pictures            = require 'models/pictures'
 
-  DumpSelectView      = require 'views/dump/select-view'
   LoadView            = require 'views/load-view'
 
 
@@ -27,28 +26,21 @@ define (require) ->
    * @version 0.0.1
   ###
   class DumpController extends Controller
+    @OFFCANVAS_EL:       'div.off-canvas-wrap'
+    @OFFCANVAS_CLASSNAME:'move-right'
+
 
     ###*
-     * Load a list of all {Dumps}
+     * Show a list of all {Dumps} (shows the off canvas list)
      *
      * @param  {Object} params Route variables and GET Parameters
     ###
     select: (params) ->
       @adjustTitle "Select dump"
 
-      dumps = new Dumps
-      loadView = new LoadView region: 'info'
+      @publishEvent 'refresh:dumps'
 
-      dumps.fetch()
-        .then ->
-          dumps.each (dump) -> dump.fetch()
-        .always ->
-          loadView.dispose()
-        .done ->
-          console.debug "Received #{dumps.length} dumps: ", dumps
-          new DumpSelectView region: 'info', collection: dumps
-        .fail (e) ->
-          console.error "Failed to received dumps: ", e
+      $(DumpController.OFFCANVAS_EL).addClass(DumpController.OFFCANVAS_CLASSNAME)
 
 
     ###*
@@ -61,6 +53,8 @@ define (require) ->
       Chaplin.mediator.dumpid = params.id
       Chaplin.mediator.publish 'dumpid:change', params.id
 
+      $(DumpController.OFFCANVAS_EL).removeClass(DumpController.OFFCANVAS_CLASSNAME)
+
       loadView = new LoadView region: 'info'
 
       dump          = Dump.findOrCreate id: params.id
@@ -72,12 +66,17 @@ define (require) ->
       calendars     = Calendars.forDump params.id
       pictures      = Pictures.forDump params.id
 
-      $.when dump.fetch(), contacts.fetch(), phonenumbers.fetch(), calllogs.fetch(), messages.fetch(), browserhistories.fetch(), calendars.fetch(), pictures.fetch()
+      dump.fetch()
+        .then (json) =>
+          #TODO fix non autofetching phone model
+          phone = Phone.findOrCreate id: json.phoneId
+          console.debug "Received dump for", phone
+          $.when phone.fetch(), contacts.fetch(), phonenumbers.fetch(), calllogs.fetch(), messages.fetch(), browserhistories.fetch(), calendars.fetch(), pictures.fetch()
         .always ->
           loadView.dispose()
-        .done =>
-          console.debug "Received dump and nested objects"
-          console.debug dump, contacts, phonenumbers, calllogs, messages, browserhistories, calendars, pictures
+        .done () =>
+          console.debug "Received nested objects"
+          console.debug contacts, phonenumbers, calllogs, messages, browserhistories, calendars, pictures
           dump.set 'contacts', contacts
           dump.set 'calendars', calendars
           dump.set 'browserhistories', browserhistories

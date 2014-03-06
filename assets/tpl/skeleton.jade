@@ -1,23 +1,33 @@
-nav(data-magellan-expedition="fixed")
-	dl.sub-nav
-		dd.item.info(data-magellan-arrival="info", title="Info")
-			a(href="#info") Dumpinfo
-		dd.item.overview(data-magellan-arrival="overview", title="Overview")
-			a(href="#overview") Zusammenfassung
-		dd.item.timeline(data-magellan-arrival="timeline", title="Timeline")
-			a(href="#timeline") Zeitliche Daten
-		dd.item.contact(data-magellan-arrival="contact", title="Contact")
-			a(href="#contact") Kontakte
-		dd.item.forensic(data-magellan-arrival="forensic", title="Forensiche Tools")
-			a(href="#forensic") Forensische Tools
+div.off-canvas-wrap
+  div.inner-wrap
 
-a(name="info")
-article#info.info(data-magellan-destination="info")
-a(name="overview")
-article#overview.overview(data-magellan-destination="overview")
-a(name="timeline")
-article#timeline.timeline(data-magellan-destination="timeline")
-a(name="contact")
-article#contact.contact(data-magellan-destination="contact")
-a(name="forensic")
-article#forensic.forensic(data-magellan-destination="forensic")
+    nav.tab-bar(data-magellan-expedition="fixed")
+      dl.sub-nav
+        dd.item.dump.left-off-canvas-toggle
+          i.fa.fa-tachometer.fa-3x
+        dd.item.info(data-magellan-arrival="info", title="Info")
+          a(href="#info") Dumpinfo
+        dd.item.overview(data-magellan-arrival="overview", title="Overview")
+          a(href="#overview") Zusammenfassung
+        dd.item.timeline(data-magellan-arrival="timeline", title="Timeline")
+          a(href="#timeline") Zeitliche Daten
+        dd.item.contact(data-magellan-arrival="contact", title="Contact")
+          a(href="#contact") Kontakte
+        dd.item.forensic(data-magellan-arrival="forensic", title="Forensiche Tools")
+          a(href="#forensic") Forensische Tools
+
+    aside.left-off-canvas-menu.loader
+
+    section.main-section
+      a(name="info")
+      article#info.info(data-magellan-destination="info")
+      a(name="overview")
+      article#overview.overview(data-magellan-destination="overview")
+      a(name="timeline")
+      article#timeline.timeline(data-magellan-destination="timeline")
+      a(name="contact")
+      article#contact.contact(data-magellan-destination="contact")
+      a(name="forensic")
+      article#forensic.forensic(data-magellan-destination="forensic")
+
+    a.exit-off-canvas
