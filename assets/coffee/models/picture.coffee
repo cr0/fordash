@@ -2,6 +2,7 @@ define (require) ->
   'use strict'
 
   Chaplin         = require 'chaplin'
+  utils           = require 'lib/utils'
 
   Model           = require 'models/base/model'
 
@@ -43,7 +44,7 @@ define (require) ->
       else if fileext in ['m4a', 'aac'] then @set('type', 'audio')
       else if fileext in ['mp4', 'mov'] then @set('type', 'video')
 
-      @set 'url', "#{Chaplin.mediator.urlprefix}/media/#{Chaplin.mediator.dumpid}/show/#{@get('id')}"
+      @set 'url', utils.normalizeUri "#{Chaplin.mediator.apiRoot}/media/#{Chaplin.mediator.dumpid}/show/#{@get('id')}"
 
 
 

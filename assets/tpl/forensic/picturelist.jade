@@ -1,10 +1,4 @@
-h3 
-	i.fa.fa-picture-o
-	| Gespeicherte Bilder
-
-
-ul.pictures
+div.picturegrid
 	- each picture in pictures
-		if picture.type 
-		li
-			img(src="#{picture.url}", title="#{picture.name}")
+		if picture.type
+		img(src="#{picture.url}", title="#{picture.name}")

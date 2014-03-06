@@ -21,8 +21,9 @@ define (require) ->
      * @return {Application}
     ###
     initialize: (options = {}) ->
-      @setApiRoot options.apiRoot if options.apiRoot?
-      super
+      @apiRoot = options.apiRoot
+      @setApiRoot() if options.apiRoot?
+      super options
 
 
     ###*
@@ -31,24 +32,28 @@ define (require) ->
     ###
     initMediator: ->
       Chaplin.mediator.dumpid = utils.uuid4()
+      Chaplin.mediator.apiRoot = @apiRoot || ''
       Chaplin.mediator.cid = null
-      console.debug "Setting dumpid to #{Chaplin.mediator.dumpid}"
+      console.debug "Setting dumpid to #{Chaplin.mediator.dumpid} and apiRoot to #{Chaplin.mediator.apiRoot}"
       super
+
 
     ###*
      * Set the url to the backend providing the data
      *
      * @param {String} apiRoot
     ###
-    setApiRoot: (apiRoot) ->
-      @apiRoot = apiRoot
+    setApiRoot: ->
       @apiRoot = "#{@apiRoot}/" unless /\/$/.test @apiRoot
       console.info "Using #{@apiRoot} as API backend"
+
+      url =
 
       bbSync = Backbone.sync
       Backbone.sync = (method, model, options) =>
         options = _.extend options,
-          url: @apiRoot + if _.isFunction(model.url) then model.url() else model.url
-          beforeSend: (xhr) -> xhr.setRequestHeader 'Authorization', "Token token=FAIL-NO-TOKEN-N33DED"
+          url: utils.normalizeUri (@apiRoot + if _.isFunction(model.url) then model.url() else model.url)
+          #FIXME our server does not support the authorization header and therefore sends no cors response headers
+          #beforeSend: (xhr) -> xhr.setRequestHeader 'Authorization', "Token token=FAIL-NO-TOKEN-N33DED"
 
         bbSync method, model, options

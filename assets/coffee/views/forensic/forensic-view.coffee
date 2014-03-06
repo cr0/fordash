@@ -7,7 +7,7 @@ define (require) ->
   WebsiteView       = require 'views/forensic/website-view'
   PictureMap        = require 'views/forensic/picturemap-view'
   PictureList       = require 'views/forensic/picturelist-view'
-  
+
   Template          = require 'templates/forensic/index'
 
 
@@ -19,6 +19,12 @@ define (require) ->
       'timestamp': 'div.timestamp'
       'websites': 'div.websites'
       'pictures': 'div.pictures'
+
+
+    initialize: ->
+      @delegate 'click', 'i.map', => @subview 'pictures', new PictureMap model: @model, region: 'pictures'
+      @delegate 'click', 'i.list', => @subview 'pictures', new PictureList model: @model, region: 'pictures'
+
 
     attach: ->
       super

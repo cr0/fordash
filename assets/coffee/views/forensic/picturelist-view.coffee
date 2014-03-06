@@ -3,7 +3,7 @@ define (require) ->
 
 
   View      = require 'views/base/view'
-  
+
   Template  = require 'templates/forensic/picturelist'
 
 
