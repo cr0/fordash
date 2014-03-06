@@ -47,8 +47,6 @@ define (require) ->
       @apiRoot = "#{@apiRoot}/" unless /\/$/.test @apiRoot
       console.info "Using #{@apiRoot} as API backend"
 
-      url =
-
       bbSync = Backbone.sync
       Backbone.sync = (method, model, options) =>
         options = _.extend options,
