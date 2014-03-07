@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "5.0.x",
+    "foundation": "5.1.x",
     "chaplin": "1.0.x",
     "backbone-relational": "0.8.x",
     "backbone.stickit": "0.7.x",

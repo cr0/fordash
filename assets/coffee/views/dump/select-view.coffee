@@ -16,7 +16,7 @@ define (require) ->
     initialize: ->
       super
       @subscribeEvent 'refresh:dumps', => @collection.fetch().fail (e) =>
-        @publishEvent '!error', new Error "An error occured while requesting the dumps from the server"
+        @publishEvent '!error', new Error "An error occurred while requesting the dumps from the server"
 
 
     renderAllItems: ->

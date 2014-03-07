@@ -84,4 +84,4 @@ define (require) ->
           @redirectTo 'dashboard_home', id: params.id
         .fail (e) =>
           console.error "Failed to received dump and/or nested objects: ", e
-          @publishEvent '!error', new Error "An error occured while requesting the dump from the server"
+          @publishEvent '!error', new Error "An error occurred while requesting the dump from the server"

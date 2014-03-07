@@ -17,7 +17,7 @@ define (require) ->
     initialize: ->
       super
       @subscribeEvent '!error', (e) =>
-        console.error 'A error occured', e
+        console.error 'An error occurred', e
         @model = e
         @render()
 

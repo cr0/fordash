@@ -33,10 +33,28 @@ define (require) ->
       super
 
 
+    render: ->
+      super
+      $main = @$el.find('section.main-section')
+      $nav  = @$el.find('nav')
+
+      $nav
+        .mouseenter ->
+          $nav.removeClass('fixed') if $nav.data('fixed')
+        .mouseleave ->
+          $nav.addClass('fixed') if $nav.data('fixed')
+
+      $main.scroll () =>
+        if $main.scrollTop() > 60 then $nav.addClass('fixed').data('fixed', yes)
+        else $nav.removeClass('fixed').data('fixed', no)
+
+
     attach: ->
       super
       console.debug "adding foundation to skeleton"
-      @$el.foundation()
+      #FIXME Foundation's mangellan is such buggy, many wow
+      #$(document).foundation('mangellan', 'init')
+      $(document).foundation('offcanvas', 'init')
 
       #console.debug "adding smoothscroll"
       #@$el.smoothScroll()
