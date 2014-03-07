@@ -33,14 +33,16 @@ div#skeleton
 
     &:hover
       dl dd
-        height: 2.7em
+        transition: height 0.15s ease-in
+        a
+          transition: color 0.15s ease-in
 
     dl dd
       background-color: gray
       width: $nav-item-width
       height: 2.7em
       margin: 0
-      transition: height 0.5s ease-out
+      transition: height 0.3s ease-in
 
       &.dump
         width: $nav-dump-width
@@ -54,7 +56,7 @@ div#skeleton
         font-size: 2.3em
         line-height: 1.7em
         padding: 0 0 0 0.2em
-        transition: color 0.5s ease-out
+        transition: color 0.3s ease-in
 
     dl dd.active
       background-color: lighten(gray, $nav-lightener-multi)

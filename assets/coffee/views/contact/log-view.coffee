@@ -2,7 +2,7 @@ define (require) ->
   'use strict'
 
   View      = require 'views/base/view'
-  
+
   Template  = require 'templates/contact/log'
 
 
@@ -15,10 +15,31 @@ define (require) ->
     contact:          null
 
     initialize: ->
-      @subscribeEvent 'contact:change', (contact) => 
+      @subscribeEvent 'contact:change', (contact) =>
         console.debug "contact changed to", contact
         @contact = contact
         @render()
+
+      @delegate 'click', 'a[data-timeline]', (e) =>
+        e.preventDefault()
+        $tel = $(e.target)
+
+        @$el.find('a[data-timeline]').removeClass('active')
+        $tel.addClass('active')
+
+        type = $tel.data('timeline')
+        if type is 'all' then return @$el.find('ul.lines li').show()
+
+        showTypes = switch type
+          when 'phone' then ['CALL_INCOMING', 'CALL_OUTGOING', 'CALL_MISSED']
+          when 'message' then ['MSG_INCOMING_MMS', 'MSG_OUTGOING_MMS', 'MSG_INCOMING_SMS', 'MSG_OUTGOING_SMS']
+          when 'whatsapp' then ['MSG_INCOMING_WA_TEXT', 'MSG_OUTGOING_WA_TEXT', 'MSG_INCOMING_WA_PIC', 'MSG_OUTGOING_WA_PIC', 'MSG_INCOMING_WA_VIDEO', 'MSG_OUTGOING_WA_VIDEO', 'MSG_OUTGOING_WA_AUDIO', 'MSG_INCOMING_WA_AUDIO']
+
+        @$el.find('ul.lines li').each (idx, el) =>
+          $el = $(el)
+          if $el.data('type') in showTypes then $el.show()
+          else $el.hide()
+
 
     getTemplateData: -> $.extend @model.attributes, @calculatedAttributes()
 
@@ -26,7 +47,7 @@ define (require) ->
     calculatedAttributes: ->
       response = forensic: {}
       if @contact
-        response.forensic.log =  
+        response.forensic.log =
           name:  @contact.get('name')
           lines: @_createLogFile()
 
@@ -43,7 +64,7 @@ define (require) ->
             if call.get('duration') > 0 then LogView.CALL_RECEIVED_LINE(vars) else LogView.CALL_MISSED_LINE(vars)
           when 'OUTGOING' then LogView.CALL_SENT_LINE(vars)
 
-        type = switch call.get('direction') 
+        type = switch call.get('direction')
           when 'INCOMING'
             if call.get('duration') > 0 then 'CALL_INCOMING' else 'CALL_MISSED'
           when 'OUTGOING' then 'CALL_OUTGOING'
@@ -64,14 +85,14 @@ define (require) ->
           when 'SMS' then message.get('text')
           else "DATA #{message.get('text')}"
 
-        type = switch message.get('type') 
+        type = switch message.get('type')
           when 'WHATSAPPTEXT'
             if dir then 'MSG_INCOMING_WA_TEXT' else 'MSG_OUTGOING_WA_TEXT'
           when 'WHATSAPPPIC'
             if dir then 'MSG_INCOMING_WA_PIC' else 'MSG_OUTGOING_WA_PIC'
           when 'WHATSAPPVID'
             if dir then 'MSG_INCOMING_WA_VIDEO' else 'MSG_OUTGOING_WA_VIDEO'
-          when 'WHATSAPPAUD' 
+          when 'WHATSAPPAUD'
             if dir then 'MSG_INCOMING_WA_AUDIO' else 'MSG_OUTGOING_WA_AUDIO'
           when 'MMS'
             if dir then 'MSG_INCOMING_MMS' else 'MSG_OUTGOING_MMS'

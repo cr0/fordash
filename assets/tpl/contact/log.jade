@@ -2,19 +2,22 @@ if forensic.log
 	h3 Logfile für #{forensic.log.name}
 
 	div.filter
-		a(href="#", data-timeline="phone").active
+		a(href="#", data-timeline="phone")
 			i.fa.fa-phone
 			| Telefonate
-		a(href="#", data-timeline="message").active
+		a(href="#", data-timeline="message")
 			i.fa.fa-envelope
 			| Nachrichten
-		a(href="#", data-timeline="whatsapp").active
+		a(href="#", data-timeline="whatsapp")
 			i.fa.fa-comments
 			| Whatsapp
+		a(href="#", data-timeline="all").active
+			i.fa.fa-bullhorn
+			| Alles
 
 	ul.lines
 		- each line in forensic.log.lines
-			li
+			li(data-type="#{line.type}")
 				case line.type
 					when 'CALL_INCOMING'
 						i.fa.fa-phone
@@ -61,7 +64,7 @@ if forensic.log
 						i.fa.fa-comments
 						i.fa.fa-video-camera
 						i.fa.fa-arrow-right
-					when 'MSG_OUTGOING_WA_AUDIO'
+					when 'MSG_INCOMING_WA_AUDIO'
 						i.fa-comments
 						i.fa.fa-volume-up
 						i.fa.fa-arrow-left
