@@ -6,6 +6,7 @@ define (require) ->
   Dumps               = require 'models/dumps'
 
   HeaderView          = require 'views/header-view'
+  ErrorView           = require 'views/error-view'
   SkeletonView        = require 'views/skeleton-view'
   DumpSelectView      = require 'views/dump/select-view'
 
@@ -26,6 +27,7 @@ define (require) ->
      * @private
     ###
     beforeAction: (params, route) ->
+      new ErrorView
       @reuse 'header', HeaderView
       @reuse 'site', SkeletonView
       @reuse 'loader', DumpSelectView, region: 'loader', collection: new Dumps

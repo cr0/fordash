@@ -25,6 +25,12 @@ define (require) ->
       stop:           '<UNKNOWN_STOP_DATE>'
       location:       '<UNKNOWN_LOCATION>'
 
+
+    ###*
+     * Remap attributes send from server to a more intuitive name
+     *
+     * @type {Object}
+    ###
     mapping:
       'stop':         'end'
 

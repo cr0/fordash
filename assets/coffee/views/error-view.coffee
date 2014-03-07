@@ -1,23 +1,29 @@
-define [
-  'jquery'
-  'lib/utils'
-  'views/base/view'
-  'templates/error'
-], ($, util, View, Template) ->
+define (require) ->
   'use strict'
 
+  View        = require 'views/base/view'
+
+  Template    = require 'templates/error'
+
+
   class ErrorView extends View
-    template:   Template
+    template:         Template
+    container:        'section.content'
+    autoRender:       no
+    containerMethod: 'replaceWith'
+    className:        'error'
+
 
     initialize: ->
       super
-      @subscribeEvent '!error', (e) => 
+      @subscribeEvent '!error', (e) =>
         console.error 'A error occured', e
         @model = e
         @render()
 
+
     getTemplateData: ->
-      data = 
+      data =
         name:     @model.name
         code:     if @model.code then @model.code else 500
         message:  @model.message
@@ -27,8 +33,6 @@ define [
 
       data
 
-    render: ->
-      if not @model then return
 
-      super
-      util.pageTransition @$el.parent(), 'left'
+    render: ->
+      super if @model

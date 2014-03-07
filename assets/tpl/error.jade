@@ -1,8 +1,13 @@
 
-h1 ##{code} &mdash; #{name}
+i.fa.fa-umbrella.head
+
+h1 Argh, it's raining errors
+
 p.info= message
 
 pre.stack= stack
 
 p
-  a(href="/") startseite
+  a(onclick="window.location.reload();")
+    i.fa.fa-refresh
+    |   nochmal

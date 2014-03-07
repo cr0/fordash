@@ -26,6 +26,12 @@ define (require) ->
       type:   '<UNKNOWN_TYPE>'
       date:   '<UNKNOWN_DATE>'
 
+
+    ###*
+     * Remap attributes send from server to a more intuitive name
+     *
+     * @type {Object}
+    ###
     mapping:
       'messagetype':  'direction'
       'messageMedium':'type'
