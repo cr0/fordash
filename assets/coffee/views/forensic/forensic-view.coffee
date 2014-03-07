@@ -1,7 +1,7 @@
 define (require) ->
   'use strict'
 
-  View              = require 'views/base/view'
+  DumpView          = require 'views/base/dump-view'
   WordSearchView    = require 'views/forensic/word-search-view'
   TimestampView     = require 'views/forensic/timestamp-view'
   WebsiteView       = require 'views/forensic/website-view'
@@ -11,7 +11,7 @@ define (require) ->
   Template          = require 'templates/forensic/index'
 
 
-  class ForensicView extends View
+  class ForensicView extends DumpView
     template:   Template
     className:  'graph'
     regions:
@@ -22,6 +22,8 @@ define (require) ->
 
 
     initialize: ->
+      super
+
       @delegate 'click', 'i.map', => @subview 'pictures', new PictureMap model: @model, region: 'pictures'
       @delegate 'click', 'i.list', => @subview 'pictures', new PictureList model: @model, region: 'pictures'
 

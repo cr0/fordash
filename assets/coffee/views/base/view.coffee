@@ -15,6 +15,7 @@ define (require) ->
   ###
   class View extends Chaplin.View
     _.extend @prototype, Chaplin.EventBroker
+    containerMethod: 'html'
 
     autoRender: true
     getTemplateFunction: -> @template

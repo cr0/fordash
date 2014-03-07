@@ -15,13 +15,14 @@ define (require) ->
 
     year:     d3.time.format('%Y')(new Date())
     direction:'both'
+    containerMethod: 'append'
 
     initialize: ->
-      @subscribeEvent 'graph:yearchange', (year) => 
+      @subscribeEvent 'graph:yearchange', (year) =>
         @year = year
         @update()
 
-      @subscribeEvent 'graph:directionchange', (direction) => 
+      @subscribeEvent 'graph:directionchange', (direction) =>
         @direction = direction
         @update()
 
@@ -85,8 +86,8 @@ define (require) ->
             y:    _.parseInt weekday
             size: calls.length
         .flatten()
-        .value()      
-        
+        .value()
+
       smsmms = @model.getMessages().chain()
         .filter (message) =>
           d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['SMS', 'MMS'] and message.get('direction') in direction
@@ -101,8 +102,8 @@ define (require) ->
             y:    _.parseInt weekday
             size: messages.length
         .flatten()
-        .value()     
-        
+        .value()
+
       wa = @model.getMessages().chain()
         .filter (message) =>
           d3.time.format('%Y')(new Date(message.get('date'))) is "#{@year}" and message.get('type') in ['WHATSAPPTEXT', 'WHATSAPPPIC', 'WHATSAPPVID', 'WHATSAPPAUD'] and message.get('direction') in direction
@@ -117,8 +118,8 @@ define (require) ->
             y:    _.parseInt weekday
             size: messages.length
         .flatten()
-        .value()    
-        
+        .value()
+
       calendars = @model.get('calendars').chain()
         .filter (calendar) =>
           d3.time.format('%Y')(new Date(calendar.get('start'))) is "#{@year}"
@@ -133,8 +134,8 @@ define (require) ->
             y:    _.parseInt weekday
             size: calendars.length
         .flatten()
-        .value()    
-        
+        .value()
+
 
       browserhistories = @model.get('browserhistories').chain()
         .filter (browser) =>
@@ -150,7 +151,7 @@ define (require) ->
             y:    _.parseInt weekday
             size: browsers.length
         .flatten()
-        .value()  
+        .value()
 
       [
         key: 'Telefonate (Minuten)'

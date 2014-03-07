@@ -14,13 +14,14 @@ define (require) ->
 
     year:     d3.time.format('%Y')(new Date())
     direction:'both'
+    containerMethod: 'append'
 
     initialize: ->
-      @subscribeEvent 'graph:yearchange', (year) => 
+      @subscribeEvent 'graph:yearchange', (year) =>
         @year = year
         @update()
 
-      @subscribeEvent 'graph:directionchange', (direction) => 
+      @subscribeEvent 'graph:directionchange', (direction) =>
         @direction = direction
         @update()
 
@@ -128,7 +129,7 @@ define (require) ->
       addMissingMonths = (array) ->
         months = [1..12]
 
-        _.each array, (el) -> 
+        _.each array, (el) ->
           pos = -1
           for month in months
             pos++
@@ -136,7 +137,7 @@ define (require) ->
           months[pos] = null
 
         _.each _.without(months, null), (month) ->
-          array.push 
+          array.push
             label: month
             value: 0
 

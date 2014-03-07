@@ -13,13 +13,14 @@ define (require) ->
 
     year:     d3.time.format('%Y')(new Date())
     direction:'both'
+    containerMethod: 'append'
 
     initialize: ->
-      @subscribeEvent 'graph:yearchange', (year) => 
+      @subscribeEvent 'graph:yearchange', (year) =>
         @year = year
         @update()
 
-      @subscribeEvent 'graph:directionchange', (direction) => 
+      @subscribeEvent 'graph:directionchange', (direction) =>
         @direction = direction
         @update()
 
@@ -123,7 +124,7 @@ define (require) ->
       addMissingWeekdays = (array) ->
         days = [0..6]
 
-        _.each array, (el) -> 
+        _.each array, (el) ->
           pos = -1
           for day in days
             pos++
@@ -131,7 +132,7 @@ define (require) ->
           days[pos] = null
 
         _.each _.without(days, null), (day) ->
-          array.push 
+          array.push
             label: day
             value: 0
 

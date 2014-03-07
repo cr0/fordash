@@ -4,11 +4,11 @@ define (require) ->
   View      = require 'views/base/view'
 
   Phone     = require 'models/phone'
-  
+
   Template  = require 'templates/dumpinfo'
 
 
-  class MessageView extends View
+  class DumpInfoView extends View
     template:   Template
     className:  'graph'
 

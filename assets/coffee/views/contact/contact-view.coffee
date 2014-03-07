@@ -1,17 +1,17 @@
 define (require) ->
   'use strict'
 
-  View              = require 'views/base/view'
+  DumpView          = require 'views/base/dump-view'
   ContactBubbleView = require 'views/contact/contactbubble-view'
   TopView           = require 'views/contact/top-view'
   SpecialView       = require 'views/contact/special-view'
   DetailsView       = require 'views/contact/details-view'
   LogView           = require 'views/contact/log-view'
-  
+
   Template          = require 'templates/contact/index'
 
 
-  class OverviewView extends View
+  class OverviewView extends DumpView
     template:   Template
     className:  'graph'
     regions:
@@ -20,6 +20,7 @@ define (require) ->
       'special':    'div.special'
       'contacts':   'div.contacts'
       'top':        'div.top'
+
 
     attach: ->
       super
