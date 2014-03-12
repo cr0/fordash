@@ -13,6 +13,7 @@ define (require) ->
    * @version 0.0.1
   ###
   class DumpView extends View
+    containerMethod: 'html'
 
     initialize: ->
       super

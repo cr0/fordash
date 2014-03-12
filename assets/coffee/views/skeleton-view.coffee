@@ -39,12 +39,10 @@ define (require) ->
       $nav  = @$el.find('nav')
 
       $nav
-        .mouseenter ->
-          $nav.removeClass('fixed') if $nav.data('fixed')
-        .mouseleave ->
-          $nav.addClass('fixed') if $nav.data('fixed')
+        .mouseenter -> $nav.removeClass('fixed') if $nav.data('fixed')
+        .mouseleave -> $nav.addClass('fixed') if $nav.data('fixed')
 
-      $main.scroll () =>
+      $main.scroll () ->
         if $main.scrollTop() > 60 then $nav.addClass('fixed').data('fixed', yes)
         else $nav.removeClass('fixed').data('fixed', no)
 

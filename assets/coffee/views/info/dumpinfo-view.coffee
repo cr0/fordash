@@ -1,14 +1,14 @@
 define (require) ->
   'use strict'
 
-  View      = require 'views/base/view'
+  DumpView  = require 'views/base/dump-view'
 
   Phone     = require 'models/phone'
 
   Template  = require 'templates/dumpinfo'
 
 
-  class DumpInfoView extends View
+  class DumpInfoView extends DumpView
     template:   Template
     className:  'graph'
 
