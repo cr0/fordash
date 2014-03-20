@@ -116,6 +116,6 @@ define (require) ->
         types = ['contacts', 'messages', 'calllogs', 'phonenumbers']
         for type, i in types
           if ok[i] then types[i] = false
-        return @publishEvent '!error', new Error "The received dump is not feasable (insufficient data: #{_.compact(types).join(', ')})"
+        return @publishEvent '!error', new Error "The received dump is not feasible (insufficient data: #{_.compact(types).join(', ')})"
 
       @redirectTo 'dashboard_home', id: id
