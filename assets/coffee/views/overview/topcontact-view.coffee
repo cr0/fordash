@@ -2,7 +2,10 @@ define (require) ->
   'use strict'
 
   View      = require 'views/base/view'
-  
+
+  Calllogs  = require 'models/calllogs'
+  Messages  = require 'models/messages'
+
   Template  = require 'templates/overview/topcontact'
 
 
@@ -22,11 +25,12 @@ define (require) ->
         topcontact: topcontact
 
     findTopContact: ->
-      minutes = 0
-      messages = 0
+      minutes = -1
+      messages = -1
       contact = null
 
       @model.get('contacts').each (currentContact) ->
+        return if currentContact.id == 9999 # skip whatsapp contact
         currentMinutes = currentContact.get('phonenumbers').reduce (memo, phonenumber) ->
           memo + phonenumber.get('calllogs').reduce (memo, calllog) ->
             memo + calllog.get('duration')
@@ -37,19 +41,19 @@ define (require) ->
           memo + phonenumber.get('messages').length
         , 0
 
-        #console.debug "current contact", currentContact, ": minutes #{currentMinutes} messages #{currentMessages}"
+        console.debug "current contact", currentContact, ": minutes #{currentMinutes} messages #{currentMessages}"
 
         if currentMessages * TopcontactView.MESSAGES_MULTI + currentMinutes * TopcontactView.MINUTES_MULTI > minutes + messages
           minutes = currentMinutes
           messages = currentMessages
           contact = currentContact
-          #console.debug "new top contact", currentContact
+          console.debug "new top contact", currentContact
 
       calls = contact.getCalls()
       messages = contact.getMessages()
 
       {
-        calls:  
+        calls:
           number: calls.length
           minutes: (minutes / 60).toFixed(2)
           average: (minutes / calls.length / 60).toFixed(2)
